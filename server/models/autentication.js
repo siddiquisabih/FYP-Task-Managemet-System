@@ -18,6 +18,10 @@ const authSchema = new Schema({
     name: {
         type: String
     },
+    createdDate: {
+        type: Date,
+        default: Date.now
+    },
 })
 
 const auth = mongoose.model("Authentication", authSchema)

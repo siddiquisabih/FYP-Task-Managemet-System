@@ -9,4 +9,12 @@ module.exports = (app) => {
     app.post('/api/login', authControler.login)
 
 
+
+
+
+    // Employee
+    app.post('/api/create/employee', authControler.signup)
+
+
+
 }

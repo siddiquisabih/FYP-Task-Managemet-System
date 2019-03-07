@@ -1,5 +1,5 @@
 var authControler = require("../controler/authControler")
-
+var taskControler = require("../controler/taskControler")
 
 module.exports = (app) => {
 
@@ -11,9 +11,13 @@ module.exports = (app) => {
 
 
 
+    // task 
+    // create 
+        app.post('/api/tast/create' , taskControler.createTask)
+
 
     // Employee
-    app.post('/api/create/employee', authControler.signup)
+    // app.post('/api/create/employee', authControler.signup)
 
 
 

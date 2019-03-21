@@ -68,7 +68,9 @@ const empHead = new Schema({
     region: {
         type: String
     },
-
+    name: {
+        type: String
+    }
 })
 
 const employee = mongoose.model("employee", empHead)
@@ -81,25 +83,25 @@ module.exports = employee
 
 
 
-var json = {
-    "id": "",
-    "employeeId": "",
-    "createdBy": "",
-    "createdDate": "",
-    "isActive": "",
-    "isDelete": "",
-    "isBlocked": "",
-    "GUID": "",
-    "moduleId": "",
-    "imageUrl": "",
-    "email": "",
-    "salary": "",
-    "status": "",
-    "dateOfBirth": "",
-    "joinedDate": "",
-    "nationality": "",
-    "mobileNo": "",
-    "address": "",
-    "bloodGroup": "",
-    "region": "",
-}
+// var json = {
+//     "id": "",
+//     "employeeId": "",
+//     "createdBy": "",
+//     "createdDate": "",
+//     "isActive": "",
+//     "isDelete": "",
+//     "isBlocked": "",
+//     "GUID": "",
+//     "moduleId": "",
+//     "imageUrl": "",
+//     "email": "",
+//     "salary": "",
+//     "status": "",
+//     "dateOfBirth": "",
+//     "joinedDate": "",
+//     "nationality": "",
+//     "mobileNo": "",
+//     "address": "",
+//     "bloodGroup": "",
+//     "region": "",
+// }

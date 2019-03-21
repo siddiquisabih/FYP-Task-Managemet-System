@@ -9,44 +9,47 @@ const head = new Schema({
     Id: {
         type: String
     },
-    EmployeeId: {
+    employeeId: {
         type: String
     },
-    TaskTitle: {
+    taskTitle: {
         type: String
     },
-    Description: {
+    description: {
         type: String
     },
-    CreatedBy: {
+    createdBy: {
         type: String
     },
-    CreatedDate: {
+    createdDate: {
         type: Date,
         default: Date.now
     },
-    IsActive: {
+    isActive: {
         type: Boolean
     },
-    IsDelete: {
+    isDelete: {
         type: Boolean
     },
-    IsClosed: {
+    isClosed: {
         type: Boolean
     },
     GUID: {
         type: String
     },
-    ModuleId: {
+    moduleId: {
         type: String
     },
-    TranType: {
+    tranType: {
         type: String
     },
-    TaskActivities: {
+    taskActivities: {
         type: String
     },
-    TaskAttachment: {
+    taskAttachment: {
+        type: String
+    },
+    isHold: {
         type: String
     },
 })
@@ -130,7 +133,3 @@ module.exports = task
 
 
 // })
-
-
-
-

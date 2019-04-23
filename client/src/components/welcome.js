@@ -1,25 +1,26 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Container, Icon } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
 
-// create a component
 class Welcome extends Component {
-   
+
     static navigationOptions = {
-        title : "Welcome",
-        
-        drawerIcon:()=>{
+        title: "Welcome",
+
+        drawerIcon: () => {
             return (
-                <Icon  name="ios-cog"/>
-            )}
-        
+                <Icon name="ios-cog" />
+            )
+        }
+
     }
-   
+
     render() {
         return (
+
             <View style={styles.container}>
-                <Text onPress={()=>{this.props.navigation.openDrawer()}} >Welcome To Task Management</Text>
+                <Text onPress={() => { this.props.navigation.openDrawer() }} >Welcome To Task Management</Text>
             </View>
         );
     }
@@ -31,7 +32,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: '',
     },
 });
 

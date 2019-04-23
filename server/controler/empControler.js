@@ -11,7 +11,6 @@ module.exports = {
         if (!email || !name) {
             res.send("you must provide email and name ")
         }
-
         empModal.findOne({
             email: email
         }, (err, found) => {
@@ -23,50 +22,53 @@ module.exports = {
                     error: "Email Is In Use Or employee already exist"
                 })
             }
-            empModal.create(req.body)
-                .then((data) => {
-                    if (data) {
-                        var objId = data._id.toString()
+            if (!found) {
+                empModal.create(req.body)
+                    .then((data) => {
+                        if (data) {
+                            var objId = data._id.toString()
                             var customerid = objId.slice(objId.length - 5)
                             empModal.findByIdAndUpdate({ _id: data._id }, { $set: { employeeId: customerid } }, function (err, doc) {
                                 if (err) {
-                                    res.send({ returnId: -1, message: err  , returnObject : {}})
+                                    res.send({ returnId: -1, message: err, returnObject: {} })
+                                }
+                                else {
+                                    var sendObj = data
+                                    // delete sendObj.password
+                                    res.send({ returnId: 1, message: 'successfully created', returnObject: sendObj })
                                 }
                             })
-                        res.send({ returnId: 1, message: 'successfully created'  , returnObject : data})
-                    }
-                })
+                        }
+                    })
+            }
         })
     },
- 
 
+    updateEmp: (req, res, next) => {
 
-
-updateEmp: (req, res, next) => {
-
-    const employeeId = req.body.employeeId
-    const email = req.body.email
-    if (!employeeId || !email) {
-        res.send("you must provide email")
-    }
-    empModal.findOne({
-        email: email
-    }, (err, found) => {
-        if (err) {
-            return next(err)
+        const employeeId = req.body.employeeId
+        const email = req.body.email
+        if (!employeeId || !email) {
+            res.send("you must provide email")
         }
-        if (found) {
-            empModal.findByIdAndUpdate({ _id: found._id }, { 
-                isDelete:  req.body.isDelete
-             }, function (err, doc) {
-                if (err) {
-                    res.send({ returnId: -1, message: err  , returnObject : {}})
-                }
-                res.send({message: 'succes'})
-            })
-        }
-    })
-},
+        empModal.findOne({
+            email: email
+        }, (err, found) => {
+            if (err) {
+                return next(err)
+            }
+            if (found) {
+                empModal.findByIdAndUpdate({ _id: found._id }, {
+                    isDelete: req.body.isDelete
+                }, function (err, doc) {
+                    if (err) {
+                        res.send({ returnId: -1, message: err, returnObject: {} })
+                    }
+                    res.send({ message: 'succes' })
+                })
+            }
+        })
+    },
 }
 
 

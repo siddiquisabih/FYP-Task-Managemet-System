@@ -13,6 +13,9 @@ const empHead = new Schema({
     employeeId: {
         type: String
     },
+    createdByID: {
+        type: String
+    },
     createdBy: {
         type: String
     },
@@ -70,7 +73,10 @@ const empHead = new Schema({
     },
     name: {
         type: String
-    }
+    },
+    password: {
+        type: String
+    },
 })
 
 const employee = mongoose.model("employee", empHead)
@@ -104,4 +110,7 @@ module.exports = employee
 //     "address": "",
 //     "bloodGroup": "",
 //     "region": "",
+//     "password": "123456",
+//     "name":"sabih"
 // }
+

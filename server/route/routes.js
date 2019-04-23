@@ -6,7 +6,7 @@ module.exports = (app) => {
 
 
     // authentication
-    app.post('/api/signup', authControler.signup)
+    // app.post('/api/signup', authControler.signup)
     app.post('/api/login', authControler.login)
 
 
@@ -14,8 +14,8 @@ module.exports = (app) => {
 
     // task 
     // create 
-    app.post('/api/tast/create', taskControler.createTask)
-
+    app.post('/api/task/create', taskControler.createTask)
+    // app.get('/api/task/getAll/',taskControler.getAllTask)
 
     // Employee
     app.post('/api/create/employee', empControler.createEmp)

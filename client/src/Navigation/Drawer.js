@@ -3,7 +3,7 @@ import Signup from "../components/Auth/Signup"
 import Login from "../components/Auth/Login"
 import Splash from "../components/splash"
 import Logout from "../components/Auth/logout"
-import Welcome from "../components/welcome";
+import Welcome from "../components/overview";
 
 
 const AppNavigator = createDrawerNavigator({

@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { Image , StatusBar , ImageBackground} from 'react-native'
-import { Container, Spinner , Text } from "native-base"
+import { StatusBar } from 'react-native'
+import { Spinner, Text } from "native-base"
 import Midware from "../../src/Store/Middleware/AuthMidware"
 import { connect } from "react-redux"
+import LinearGradient from 'react-native-linear-gradient';
 
 function mapStateToProps(state) {
-    console.log(state , 'state 321')
+    console.log(state, 'state 321')
     return {
         authError: state.AuthReducer.userAuthError,
         userAuthentic: state.AuthReducer.userAuthentic
     }
-  
+
 }
 
 function mapDispatchToProps(dispatch) {
@@ -49,10 +50,10 @@ class Splash extends Component {
 
 
     componentWillMount() {
-       
+
 
         this.props.checkAuth()
-    setTimeout(() => { this.navigateUser() }, 2000)
+        setTimeout(() => { this.navigateUser() }, 2000)
 
     }
 
@@ -71,32 +72,35 @@ class Splash extends Component {
 
     render() {
         return (
-            <ImageBackground
-                source={require("../images/main.jpg")}
-                style={styles.imageBackground}
-            >
-            <StatusBar
-                            backgroundColor="black" />
-                <Container style={styles.spinner} >
-                    <Spinner
-                        color="red"
-                    />
+            <LinearGradient colors={['#b3e5fc', '#03a9f4', '#039be5']} style={styles.container}>
+                <StatusBar
+                    backgroundColor="black" />
+                <Spinner
+                    color="white"
+                />
+                <Text style={styles.heading}>Task Management System</Text>
 
-                </Container>
-            </ImageBackground>
+            </LinearGradient>
         )
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Splash)
 
 const styles = {
-    imageBackground: {
+    container: {
         flex: 1,
-        width: null,
-        height: null,
-        resizeMode: "cover"
+        justifyContent: 'center',
+        alignItems: 'center',
     },
+
     spinner: {
         justifyContent: "center"
+    },
+    heading: {
+        fontFamily: 'Cochin',
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
+
     }
 }

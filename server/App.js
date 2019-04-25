@@ -7,7 +7,7 @@ var mongoose = require('mongoose')
 
 
 // mongoose.connect('mongodb://patient:patient123@ds139869.mlab.com:39869/patient',
-mongoose.connect('mongodb://localhost/', {
+mongoose.connect('mongodb://localhost/dbs', {
     useMongoClient: true
 })
 

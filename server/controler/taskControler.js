@@ -6,25 +6,43 @@ module.exports = {
 
     createTask: (req, res, next) => {
 
-        const email = req.body.email
-        const password = req.body.password
-        const name = req.body.name
+        const createdByID = req.body.createdByID
+        const employeeId = req.body.employeeId
 
-        if (!email || !password) {
-            res.send("you must provide email and password ")
+
+
+
+
+        if (!createdByID || !employeeId) {
+            res.send({ success: false, message: "you must provide all values", returnObj: null })
         }
 
-        auth.findOne({ email: email }, (err, found) => {
-            if (err) {
-                return next(err)
-            }
-            if (found) {
-                return res.send({ error: "Email Is In Use" })
-            }
-
-            auth.create({ email: email, password: password, name: name })
-                .then((data) => { res.send(data) })
-        })
+        else {
+            
+            task.create(req.body)
+                .then((data) => {
+                    if (data) {
+                        
+                        var objId = data._id.toString()
+                        var tranID = objId.slice(objId.length - 5)
+                        task.findByIdAndUpdate({ _id: data._id }, { $set: { tranID: tranID } }, function (err, doc) {
+                           
+                            if (err) {
+                                res.send({ success: false, message: err, returnObject: null })
+                            }
+                            else {
+                                var sendObj = data
+                                res.send({ success: 1, message: 'successfully created', returnObject: sendObj })
+                            }
+                           
+                        })
+                    }
+                    else {
+                        console.log('data nai hai')
+                        res.send({ success: false, message: "can't create task", returnObj: null })
+                    }
+                })
+        }
     },
     updateTask: (req, res, next) => {
 

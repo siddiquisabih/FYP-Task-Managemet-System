@@ -1,31 +1,33 @@
-const auth = require("../models/autentication")
-
+// const auth = require("../models/autentication")
+const emp = require("..//models/employee/empSchema")
 
 module.exports = {
 
 
-    signup: (req, res, next) => {
+    // signup: (req, res, next) => {
 
-        const email = req.body.email
-        const password = req.body.password
-        const name = req.body.name
+    //     const email = req.body.email
+    //     const password = req.body.password
+    //     const name = req.body.name
 
-        if (!email || !password) {
-            res.send("you must provide email and password ")
-        }
+    //     // res.send({ email: email, password: password, name: name })
+    //     if (!email || !password) {
+    //         res.send("you must provide email and password ")
+    //     }
 
-        auth.findOne({ email: email }, (err, found) => {
-            if (err) {
-                return next(err)
-            }
-            if (found) {
-                return res.send({ error: "Email Is In Use" })
-            }
 
-            auth.create({ email: email, password: password, name: name })
-                .then((data) => { res.send(data) })
-        })
-    },
+    //     auth.findOne({ email: email }, (err, found) => {
+    //         if (err) {
+    //             return next(err)
+    //         }
+    //         if (found) {
+    //             return res.send({ error: "Email Is In Use" })
+    //         }
+
+    //         auth.create({ email: email, password: password, name: name })
+    //             .then((data) => { res.send(data) })
+    //     })
+    // },
 
 
     login: (req, res, next) => {
@@ -33,22 +35,26 @@ module.exports = {
         const email = req.body.email
         const password = req.body.password
 
-        auth.findOne({ email: email }, (err, found) => {
+        if (email && password) {
 
-            if (err) {
-                return next(err)
-            }
+            emp.findOne({ email: email }, (err, found) => {
 
-            if (found && found.password === password && found.email === email) {
+                if (err) {
+                    return send({ success: false, message: "can't login user", returnObj: null })
+                }
 
-                return res.send(found)
+                if (found && found.password === password && found.email === email) {
+                    var foundObj = found
+                    foundObj.password = ''
+                    return res.send({ success: true, message: "successfully login", returnObj: foundObj })
 
-            }
+                }
+                res.send({ success: false, message: "Invalid email and password", returnObj: null })
+            })
+        }
+        else {
+            res.send({ success: false, message: "provide username and password", returnObj: null })
 
-            res.send({ error: "Invalid Username, Email And Password" })
-
-        })
-
+        }
     }
-
 }

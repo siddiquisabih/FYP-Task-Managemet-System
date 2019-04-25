@@ -11,9 +11,9 @@ import Drawer from "./Drawer"
 const AppNavigator = createStackNavigator({
 
 
-    // SplashRoute: {
-    //     screen: Splash
-    // },
+    SplashRoute: {
+        screen: Splash
+    },
 
     LoginRoute: {
         screen: Login

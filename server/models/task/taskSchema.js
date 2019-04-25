@@ -18,6 +18,9 @@ const head = new Schema({
     description: {
         type: String
     },
+    createdByID: {
+        type: String
+    },
     createdBy: {
         type: String
     },
@@ -52,6 +55,15 @@ const head = new Schema({
     isHold: {
         type: String
     },
+    startDate: {
+        type: Date
+    },
+    endDate: {
+        type: Date
+    },
+    tranID: {
+        type: String
+    }
 })
 
 const task = mongoose.model("task", head)
@@ -133,3 +145,19 @@ module.exports = task
 
 
 // })
+
+// {"Id":"",
+// "employeeId":"124",
+// "taskTitle":"asd",
+// "description":"asdasd",
+// "createdByID":"132",
+// "createdBy":"asd",
+// "isActive":"true",
+// "isDelete":"false",
+// "isClosed":"false",
+// "GUID":"",
+// "moduleId":"",
+// "tranType":"",
+// "taskActivities":"",
+// "taskAttachment":"",
+// "isHold":"false",}

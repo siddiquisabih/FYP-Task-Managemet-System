@@ -157,11 +157,11 @@ class Login extends Component {
                             {this.handleSpinner()}
                             {this.handleError()}
 
-                            <Button
+                            {/* <Button
                                 danger
                                 transparent
                                 onPress={() => { this.props.navigation.navigate("SignupRoute") }}
-                            ><Text>No Account? Signup</Text></Button>
+                            ><Text>No Account? Signup</Text></Button> */}
 
 
 

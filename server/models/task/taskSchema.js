@@ -2,8 +2,6 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 
-
-
 const head = new Schema({
 
     Id: {
@@ -63,6 +61,19 @@ const head = new Schema({
     },
     tranID: {
         type: String
+    },
+    progress: {
+        type: Number
+    },
+    status: {
+        type: String
+    },
+    priority: {
+        type: Number
+    },
+    lastUpdate: {
+        type: Date,
+        default: Date.now
     }
 })
 
@@ -70,6 +81,10 @@ const task = mongoose.model("task", head)
 
 module.exports = task
 
+// Task priority
+// 1) high 
+// 2) medium 
+// 3) low 
 
 
 // json

@@ -69,6 +69,22 @@ module.exports = {
             }
         })
     },
+
+    getAllEmployees: (req, res, next) => {
+
+        const emp = req.params.employeeId
+        var empAllArray = []
+        empModal.find({}).then(data => {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].employeeId != emp) {
+                    empAllArray.push(data[i])
+                }
+            }
+            res.send({ success: true, message: "All employees", returnObj: empAllArray })
+        }).catch(er => {
+            res.send({ success: false, message: "error", returnObj: er })
+        })
+    }
 }
 
 

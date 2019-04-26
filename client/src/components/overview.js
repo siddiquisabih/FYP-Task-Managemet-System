@@ -1,13 +1,14 @@
 //import liraries
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
+import ProgressCircle from 'react-native-progress-circle'
 
-class Welcome extends Component {
+class Overview extends Component {
 
     static navigationOptions = {
-        title: "Welcome",
+        title: "Overview",
 
         drawerIcon: () => {
             return (
@@ -45,8 +46,32 @@ class Welcome extends Component {
                                 fix all ui bugs
                                 </Text>
 
+                            <View style={{ marginLeft: 10, flexDirection: 'row' }}>
 
-                            <Button rounded light small style={{ alignSelf: 'center', marginBottom: 12 }}>
+
+                                <ProgressCircle
+                                    percent={50}
+                                    radius={20}
+                                    borderWidth={3}
+                                    color="#3399FF"
+                                    shadowColor="#999"
+                                    bgColor="#fff"
+
+                                >
+                                    <Text style={{ fontSize: 12 }}>{'50%'}</Text>
+                                </ProgressCircle>
+
+                                <View style={{ marginLeft: 5, }}>
+
+                                    <Text note>Deadline 23-April-2019  </Text>
+                                    <Text note>Last updated on 11-April-2019</Text>
+                                </View>
+
+                            </View>
+
+
+
+                            <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }}>
                                 <Text uppercase={false}>Update Now</Text>
                             </Button>
 
@@ -54,27 +79,63 @@ class Welcome extends Component {
 
 
                     </Content>
+
+
+
+
+
+
+
+
+
+
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+
+
+                        <Card style={styles.pendingCard}>
+                            <LinearGradient style={styles.gradientBox} colors={['#f48fb1', '#f06292', '#ec407a']} >
+
+                                <View style={{ flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+
+                                    <Text style={styles.number}>01</Text>
+                                    <Text style={styles.statusHeading}>pending</Text>
+                                </View>
+
+                            </LinearGradient>
+                        </Card>
+
+                        <Card style={styles.pendingCard}>
+
+
+                            <LinearGradient style={styles.gradientBox} colors={['#9fa8da', '#7986cb', '#5c6bc0']} >
+
+                                <View style={{ flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+
+                                    <Text style={styles.number}>05</Text>
+                                    <Text style={styles.statusHeading}>Over due</Text>
+                                </View>
+
+                            </LinearGradient>
+                        </Card>
+
+
+                        <Card style={styles.pendingCard}>
+                            <LinearGradient style={styles.gradientBox} colors={['#80cbc4', '#4db6ac', '#26a69a']} >
+
+                                <View style={{ flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+
+                                    <Text style={styles.number}>25</Text>
+                                    <Text style={styles.statusHeading}>Completed</Text>
+                                </View>
+
+                            </LinearGradient>
+                        </Card>
+
+                    </View>
+
+
                 </LinearGradient>
-
-
-
-
-
-
-
-
-
-
-
-
-                <Card style={styles.pendingCard}>
-                    <Text style={styles.message}>pending</Text>
-
-                </Card>
-
-
-
-
 
 
 
@@ -131,22 +192,40 @@ const styles = StyleSheet.create({
         // marginTop: 12,
         width: '90%',
         marginLeft: '5%',
-        marginTop: '5%',
+        // marginTop: '5%',
         borderRadius: 10,
         // backgroundColor: '#e1bee7'
 
     },
     pendingCard: {
-        width: '30%',
-        height:'30%',
-        marginLeft: '5%',
+        width: 100,
+        height: 100,
+        borderRadius: 100 / 2,
+        // marginLeft: '5%',
         marginTop: '5%',
-        borderRadius: 50,
+        // borderRadius: 50,
 
+    },
+    statusHeading: {
+        alignSelf: 'center',
+        color: 'white'
+
+    },
+    number: {
+        alignSelf: 'center',
+        fontFamily: 'Cochin',
+        fontWeight: 'bold',
+        color: 'white'
+
+    },
+    gradientBox: {
+        width: 100,
+        height: 100,
+        borderRadius: 100 / 2,
     }
 
 
 });
 
 //make this component available to the app
-export default Welcome;
+export default Overview;

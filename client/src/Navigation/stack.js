@@ -27,7 +27,7 @@ const AppNavigator = createStackNavigator({
     SignupRoute: {
         screen: Signup
     },
-}, {headerMode :'none'})
+}, { headerMode: 'none' })
 const Stack = createAppContainer(AppNavigator);
 
 export default Stack

@@ -17,7 +17,14 @@ class Overview extends Component {
         }
 
     }
+
+    openDrawer() {
+        this.props.navigation.openDrawer()
+    }
+
     render() {
+
+
         return (
 
             // <View style={styles.container}>
@@ -28,7 +35,9 @@ class Overview extends Component {
 
             <Container>
                 <Header style={styles.header}>
-                    <Left />
+                    <Left >
+                        <Icon name="menu" style={styles.iconColor} onPress={this.openDrawer.bind(this)} />
+                    </Left>
                     <Body>
                         <Title>Overview</Title>
                     </Body>
@@ -40,7 +49,7 @@ class Overview extends Component {
                 <LinearGradient colors={['#b3e5fc', '#03a9f4', '#039be5']} style={{ flex: 1 }}>
                     <Content>
                         <Card style={styles.mainCard}>
-                            <Text style={styles.message}>Alert you have a dedline today</Text>
+                            <Text style={styles.message}>Alert! you have a dedline today</Text>
                             <Text note style={styles.date}>Assign by sabih on 23-Apr</Text>
                             <Text style={styles.description}>
                                 fix all ui bugs
@@ -63,7 +72,45 @@ class Overview extends Component {
 
                                 <View style={{ marginLeft: 5, }}>
 
-                                    <Text note>Deadline 23-April-2019  </Text>
+                                    <Text note>Deadline 25-April-2019  </Text>
+                                    <Text note>Last updated on 11-April-2019</Text>
+                                </View>
+
+                            </View>
+
+
+
+                            <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }}>
+                                <Text uppercase={false}>Update Now</Text>
+                            </Button>
+
+                        </Card>
+
+                        <Card style={styles.mainCard}>
+                            <Text style={styles.message}>Alert! you have an overdue task</Text>
+                            <Text note style={styles.date}>Assign by Umar on 19-Apr</Text>
+                            <Text style={styles.description}>
+                                Design chat screen UI on mock plus and develop. Apply validation on each textbox
+                                </Text>
+
+                            <View style={{ marginLeft: 10, flexDirection: 'row' }}>
+
+
+                                <ProgressCircle
+                                    percent={20}
+                                    radius={20}
+                                    borderWidth={3}
+                                    color="#3399FF"
+                                    shadowColor="#999"
+                                    bgColor="#fff"
+
+                                >
+                                    <Text style={{ fontSize: 12 }}>{'20%'}</Text>
+                                </ProgressCircle>
+
+                                <View style={{ marginLeft: 5, }}>
+
+                                    <Text note>Deadline 20-April-2019  </Text>
                                     <Text note>Last updated on 11-April-2019</Text>
                                 </View>
 
@@ -112,7 +159,7 @@ class Overview extends Component {
 
                                 <View style={{ flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
 
-                                    <Text style={styles.number}>05</Text>
+                                    <Text style={styles.number}>01</Text>
                                     <Text style={styles.statusHeading}>Over due</Text>
                                 </View>
 
@@ -151,7 +198,7 @@ class Overview extends Component {
 
 
 
-            </Container>
+            </Container >
         );
     }
 }
@@ -222,6 +269,9 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 100 / 2,
+    },
+    iconColor: {
+        color: 'white'
     }
 
 

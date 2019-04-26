@@ -9,24 +9,20 @@ module.exports = {
         const createdByID = req.body.createdByID
         const employeeId = req.body.employeeId
 
-
-
-
-
         if (!createdByID || !employeeId) {
             res.send({ success: false, message: "you must provide all values", returnObj: null })
         }
 
         else {
-            
+
             task.create(req.body)
                 .then((data) => {
                     if (data) {
-                        
+
                         var objId = data._id.toString()
                         var tranID = objId.slice(objId.length - 5)
                         task.findByIdAndUpdate({ _id: data._id }, { $set: { tranID: tranID } }, function (err, doc) {
-                           
+
                             if (err) {
                                 res.send({ success: false, message: err, returnObject: null })
                             }
@@ -34,7 +30,7 @@ module.exports = {
                                 var sendObj = data
                                 res.send({ success: 1, message: 'successfully created', returnObject: sendObj })
                             }
-                           
+
                         })
                     }
                     else {
@@ -46,25 +42,54 @@ module.exports = {
     },
     updateTask: (req, res, next) => {
 
-        const email = req.body.email
-        const password = req.body.password
-        const name = req.body.name
+        const requestData = req.body;
 
-        if (!email || !password) {
-            res.send("you must provide email and password ")
-        }
+        requestData.status = req.body.progress == 100 ? "Completed" : req.body.progress < 100 ? "Pending" : "Created"
 
-        auth.findOne({ email: email }, (err, found) => {
-            if (err) {
-                return next(err)
-            }
-            if (found) {
-                return res.send({ error: "Email Is In Use" })
-            }
 
-            auth.create({ email: email, password: password, name: name })
-                .then((data) => { res.send(data) })
+
+        // res.send({ success: false, message: "err", returnObject: requestData })
+
+        task.findOne({ tranID: requestData.tranID }).then(taskData => {
+            // requestData.createdDate = taskData.createdDate;
+            requestData.lastUpdate = new Date()
+            task.findByIdAndUpdate(taskData._id, { $set: requestData }, function (err, data) {
+                // res.send({ success: false, message: err, returnObject: err })
+                if (err) {
+                    res.send({ success: false, message: err, returnObject: null })
+                }
+                else {
+                    res.send({ success: true, message: 'successfully updated', returnObject: null })
+                }
+
+            })
+
+        }).catch(err => {
+            res.send({ success: true, message: 'error', returnObject: err })
         })
+
+
+
+
+
+
+    },
+
+
+    getAllTaskByEmpID: (req, res, next) => {
+
+        const employeeId = req.params.employeeId
+
+        task.find({ employeeId: employeeId }).then(data => {
+            if (data.length == 0) {
+                res.send({ success: true, message: "You have no daily updates", returnObj: data })
+            } else {
+                res.send({ success: true, message: "task list", returnObj: data })
+            }
+        }).catch(er => {
+            res.send({ success: false, message: "error", returnObj: er })
+        })
+
     },
 
 

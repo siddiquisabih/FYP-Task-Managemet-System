@@ -7,9 +7,10 @@ var mongoose = require('mongoose')
 
 
 // mongoose.connect('mongodb://patient:patient123@ds139869.mlab.com:39869/patient',
-mongoose.connect('mongodb://localhost/dbs', {
-    useMongoClient: true
+mongoose.connect('mongodb://10.30.1.124:27017/dbs', {
+    useMongoClient: true,
 })
+
 
 app.use(bodyParser.json())
 

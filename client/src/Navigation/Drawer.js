@@ -5,11 +5,18 @@ import Splash from "../components/splash"
 import Logout from "../components/Auth/logout"
 import Overview from "../components/overview";
 import CreateTask from "../components/createTask";
+import TaskList from "../components/task/taskList";
 
 
 const AppNavigator = createDrawerNavigator({
 
 
+    
+    taskListRoute: {
+        screen: TaskList
+    },
+    
+    
     createTaskRoute: {
         screen: CreateTask
     },

@@ -67,24 +67,26 @@ class Login extends Component {
     }
 
     Login() {
-        const userEmailAndPassword = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        if (userEmailAndPassword.email !== '' && userEmailAndPassword.password !== '') {
+        // const userEmailAndPassword = {
+        //     email: this.state.email,
+        //     password: this.state.password
+        // }
+        // if (userEmailAndPassword.email !== '' && userEmailAndPassword.password !== '') {
 
-            this.props.loginUser(userEmailAndPassword)
-            this.setState({ loading: true })
-        }
-        else {
-            Toast.show({
-                text: 'Fill All Boxes!',
-                position: 'bottom',
-                buttonText: 'Okay',
-                type: "danger",
-                duration: 1000
-            })
-        }
+        //     this.props.loginUser(userEmailAndPassword)
+        //     this.setState({ loading: true })
+        // }
+        // else {
+        //     Toast.show({
+        //         text: 'Fill All Boxes!',
+        //         position: 'bottom',
+        //         buttonText: 'Okay',
+        //         type: "danger",
+        //         duration: 1000
+        //     })
+        // }
+        this.props.navigation.navigate("welcomeRoute")
+
     }
 
     handleError() {

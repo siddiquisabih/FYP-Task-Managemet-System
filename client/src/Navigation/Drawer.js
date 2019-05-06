@@ -6,13 +6,16 @@ import Logout from "../components/Auth/logout"
 import Overview from "../components/overview";
 import CreateTask from "../components/task/createTask";
 import TaskList from "../components/task/taskList";
+import UserProfile from "../components/profile/userProfile";
 
 
 const AppNavigator = createDrawerNavigator({
 
 
 
-
+    userProfileRoute: {
+        screen: UserProfile
+    },
     welcomeRoute: {
         screen: Overview,
     },
@@ -25,10 +28,15 @@ const AppNavigator = createDrawerNavigator({
     lougoutRoute: {
         screen: Logout
     },
+
+    // userProfileRoute: {
+    //     screen: UserProfile
+    // },
 },
     {
         contentOptions: {
-            activeTintColor: "blue"
+            activeTintColor: "blue",
+            
         },
     }
 

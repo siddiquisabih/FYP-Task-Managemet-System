@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Textarea, Button, Input, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon, Item, Thumbnail, Tab, Tabs, TabHeading } from 'native-base';
+import { View } from 'react-native'
+import { Button, Content, Body, Container, Header, Title, Card, Right, Text, Left, Icon, Tab, Tabs, TabHeading } from 'native-base';
 import ProgressCircle from 'react-native-progress-circle'
 import LinearGradient from 'react-native-linear-gradient';
 

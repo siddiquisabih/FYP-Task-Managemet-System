@@ -1,15 +1,73 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Image, Slider, ScrollView } from 'react-native';
 import { Textarea, Button, Input, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon, Item, Thumbnail, Tab, Tabs, TabHeading } from 'native-base';
 import styles from './styles'
+import LinearGradient from 'react-native-linear-gradient';
+import ImagePicker from 'react-native-image-picker';
+
+
 
 class UpdateTask extends Component {
 
 
+    constructor() {
+        super()
+        this.state = {
+            percentage: 40
+        }
+    }
 
     goBack() {
         this.props.navigation.pop()
     }
+
+
+
+
+
+    show() {
+        var options = {
+            title: 'Select Attachment',
+
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            }
+        }
+
+
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                let source = { uri: response.uri };
+                // You can also display the image using data:
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                console.log(response.uri)
+                console.log(response.height)
+                console.log(response.width)
+
+            }
+        });
+
+
+    }
+
+
+
+
+
+
 
 
     render() {
@@ -30,10 +88,69 @@ class UpdateTask extends Component {
                 </Header>
 
 
+                <LinearGradient colors={['#b39ddb', '#b39ddb', '#7e57c2']} style={{ flex: 1 }}>
+
+                    <Content>
+
+                        <Text style={styles.label}>Description about progress </Text>
+                        <Textarea style={styles.textarea} rowSpan={5} bordered placeholder="write description" placeholderTextColor='white' />
+
+                        <Text style={styles.label}>What is your task progress? </Text>
+                        <Text style={styles.label}>{this.state.percentage}% updated </Text>
+
+                        <Slider
+                            maximumValue={100}
+                            step={5}
+                            onValueChange={(value) => { this.setState({ percentage: value }) }}
+                            value={this.state.percentage}
+                        />
 
 
 
-            </Container>
+
+                        <Text style={styles.label}>Attachment (optional) </Text>
+
+                        <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
+
+
+                            <View style={[styles.imageCard, { marginLeft: 10 }]} onPress={this.show.bind(this)}>
+                                <Text style={[styles.number, { fontSize: 20, fontWeight: 'bold' }]}>+</Text>
+                            </View>
+                            <View style={[styles.imageCard]} >
+                                <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
+                            </View>
+
+                            <View style={[styles.imageCard]} >
+                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
+                            </View>
+
+                            <View style={[styles.imageCard]} >
+                                <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
+                            </View>
+
+                            <View style={[styles.imageCard]} >
+                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
+                            </View>
+
+                            <View style={[styles.imageCard]} >
+                                <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
+                            </View>
+
+
+                        </ScrollView>
+
+
+
+                        <Item style={styles.buttonStyle}>
+
+                            <Button info rounded >
+                                <Text>update</Text>
+                            </Button>
+                        </Item>
+
+                    </Content>
+                </LinearGradient>
+            </Container >
         );
     }
 }

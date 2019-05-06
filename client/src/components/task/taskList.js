@@ -233,8 +233,8 @@ class TaskList extends Component {
 
 
 
-                                    <Button rounded light small style={styles.updateButton}>
-                                        <Text uppercase={false}>Edit Now</Text>
+                                    <Button rounded light small style={styles.updateButton} onPress={() => { this.props.navigation.navigate('editTaskRoute') }}>
+                                        <Text uppercase={false} >Edit Now</Text>
                                     </Button>
 
                                 </Card>
@@ -266,4 +266,3 @@ class TaskList extends Component {
 }
 export default TaskList
 
- 

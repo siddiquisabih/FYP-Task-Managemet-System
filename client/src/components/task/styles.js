@@ -75,14 +75,71 @@ export default StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 15,
         marginTop: 15
+    },
+
+    label: {
+        fontFamily: 'Cochin',
+        fontWeight: 'bold',
+        color: 'white',
+        padding: 10,
+        // textAlign: 'center'
+
+    },
+    textbox: {
+        width: '90%',
+        marginLeft: "5%",
+        color: 'white'
+
+    },
+    datePicker: {
+        width: '90%',
+        marginLeft: "5%",
+
+    },
+    textarea: {
+        width: '90%',
+        marginLeft: "5%",
+        borderRadius: 20,
+        borderColor: 'white',
+        color:'white'
+    },
+    buttonStyle: {
+        justifyContent: 'center',
+        borderBottomWidth: 0,
+        marginBottom: 10,
+        marginTop: 10,
+    },
+    inputText: {
+        color: 'white'
+    },
+
+
+    // image card
+
+    imageCard: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 100,
+        height: 100,
+        borderRadius: 10,
+        borderColor: 'white',
+        borderWidth: 1,
+        marginRight: 5 
+    },
+    // image card end
+
+    contentContainer: {
+        paddingVertical: 20,
+
+    },
+    imageAttach:{
+        width: 100,
+        height: 100,
+        borderRadius: 10,
+        borderColor: 'white',
+        borderWidth: 1,
     }
-
-
-
-
-
-
-
 
 
 

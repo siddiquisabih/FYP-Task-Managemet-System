@@ -7,18 +7,19 @@ import Login from "../components/Auth/Login"
 import Splash from "../components/splash"
 import Drawer from "./Drawer"
 import UpdateTask from "../components/task/updateTask";
+import EditTask from "../components/task/editTask";
 
 
 const AppNavigator = createStackNavigator({
 
 
-    // SplashRoute: {
-    //     screen: Splash
-    // },
+    SplashRoute: {
+        screen: Splash
+    },
 
-    // LoginRoute: {
-    //     screen: Login
-    // },
+    LoginRoute: {
+        screen: Login
+    },
     DrawerRoute: {
         screen: Drawer,
         navigationOptions: props => ({
@@ -29,10 +30,16 @@ const AppNavigator = createStackNavigator({
     updateTaskRoute: {
         screen: UpdateTask
     },
+    editTaskRoute: {
+        screen: EditTask
+    },
     SignupRoute: {
         screen: Signup
     },
-}, { headerMode: 'none' })
+}, {
+        headerMode: 'none',
+        initialRouteName: 'SplashRoute'
+    })
 const Stack = createAppContainer(AppNavigator);
 
 export default Stack

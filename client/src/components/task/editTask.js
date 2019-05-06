@@ -1,35 +1,26 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { View } from 'react-native'
 import { Textarea, Button, Input, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon, Item, Thumbnail } from 'native-base';
 import DatePicker from 'react-native-datepicker'
 import LinearGradient from 'react-native-linear-gradient';
+import styles from './styles'
+class EditTask extends Component {
 
-class CreateTask extends Component {
 
 
-    static navigationOptions = {
-        title: "Create Task",
-
-        drawerIcon: () => {
-            return (
-                <Icon name="ios-cog" />
-            )
-        }
-
-    }
-    openDrawer() {
-        this.props.navigation.openDrawer()
+    goBack() {
+        this.props.navigation.pop()
     }
 
     render() {
         return (
             <Container>
-                <Header style={styles.header}>
+                <Header style={styles.header} hasTabs>
                     <Left >
-                        <Icon name="menu" style={styles.iconColor} onPress={this.openDrawer.bind(this)} />
+                        <Icon name="arrow-round-back" style={styles.iconColor} onPress={this.goBack.bind(this)} />
                     </Left>
                     <Body>
-                        <Title>Create Task</Title>
+                        <Title>Edit Task</Title>
                     </Body>
                     <Right />
                 </Header>
@@ -143,7 +134,7 @@ class CreateTask extends Component {
                                 <CardItem>
                                     <Left>
                                         {/* <Thumbnail source={{ uri: '../images/doc.jpg' }} /> */}
-                                        <Thumbnail source={require('../images/doc.jpg')} />
+                                        <Thumbnail source={require('../../images/doc.jpg')} />
                                         <Text>Sabih Siddiqui</Text>
                                     </Left>
 
@@ -181,48 +172,4 @@ class CreateTask extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    header: {
-        backgroundColor: "#039be5"
-    },
-    label: {
-        fontFamily: 'Cochin',
-        fontWeight: 'bold',
-        color: 'white',
-        padding: 10,
-        // textAlign: 'center'
-
-    },
-    textbox: {
-        width: '90%',
-        marginLeft: "5%",
-        color: 'white'
-
-    },
-    datePicker: {
-        width: '90%',
-        marginLeft: "5%",
-
-    },
-    textarea: {
-        width: '90%',
-        marginLeft: "5%",
-        borderRadius: 20,
-        borderColor: 'white',
-    },
-    buttonStyle: {
-        justifyContent: 'center',
-        borderBottomWidth: 0,
-        marginBottom: 10,
-        marginTop: 10,
-
-    },
-    inputText: {
-        color: 'white'
-    },
-    iconColor: {
-        color: 'white'
-    }
-})
-export default CreateTask
+export default EditTask

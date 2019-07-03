@@ -20,10 +20,7 @@ export default StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 100 / 2,
-        // marginLeft: '5%',
         marginTop: '5%',
-        // borderRadius: 50,
-
     },
 
     userImage: {
@@ -53,26 +50,15 @@ export default StyleSheet.create({
         justifyContent: 'center',
          borderRightWidth: 0.5,
          borderColor: 'white',
-        // borderRadius: 10,
-        // borderWidth: 0.5,
-        // marginRight:10
     },
     gridCellValue: {
         flex: 1,
         justifyContent: 'center',
-        // borderRadius: 10,
-        // borderWidth: 0.5,
-        // borderColor: 'white',
-        // marginRight:10
-       
-        
     },
     gridText: {
-        // paddingLeft: 8,
         color:'white',
     },
     gridTextvalue: {
-        // paddingRight: 10,
         textAlign: 'right',
         color:'white'
     },

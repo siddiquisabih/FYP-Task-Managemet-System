@@ -7,15 +7,25 @@ import Overview from "../components/overview";
 import CreateTask from "../components/task/createTask";
 import TaskList from "../components/task/taskList";
 import UserProfile from "../components/profile/userProfile";
+import CreateComm from '../components/communication/createComm'
+import CommList from '../components/communication/commList'
+import ChatRoom from '../components/communication/chatRoom'
 
 
 const AppNavigator = createDrawerNavigator({
 
 
-
-    userProfileRoute: {
-        screen: UserProfile
+    ChatRoomRoute: {
+        screen: ChatRoom
     },
+    CommListRoute: {
+        screen: CommList
+    },
+
+    CreateCommRoute: {
+        screen: CreateComm
+    },
+
     welcomeRoute: {
         screen: Overview,
     },
@@ -28,6 +38,9 @@ const AppNavigator = createDrawerNavigator({
     lougoutRoute: {
         screen: Logout
     },
+    userProfileRoute: {
+        screen: UserProfile
+    },
 
     // userProfileRoute: {
     //     screen: UserProfile
@@ -36,7 +49,7 @@ const AppNavigator = createDrawerNavigator({
     {
         contentOptions: {
             activeTintColor: "blue",
-            
+
         },
     }
 

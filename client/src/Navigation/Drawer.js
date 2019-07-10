@@ -15,6 +15,9 @@ import ChatRoom from '../components/communication/chatRoom'
 const AppNavigator = createDrawerNavigator({
 
 
+    createTaskRoute: {
+        screen: CreateTask
+    },
     ChatRoomRoute: {
         screen: ChatRoom
     },
@@ -29,9 +32,7 @@ const AppNavigator = createDrawerNavigator({
     welcomeRoute: {
         screen: Overview,
     },
-    createTaskRoute: {
-        screen: CreateTask
-    },
+
     taskListRoute: {
         screen: TaskList
     },

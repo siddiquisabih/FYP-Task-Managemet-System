@@ -1,9 +1,15 @@
 //import liraries
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon } from 'native-base';
+import { StyleSheet, View, AsyncStorage } from 'react-native';
+import { Button, Content, Body, Container, Header, Title, Card, Right, Text, Left, Icon, Spinner } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import ProgressCircle from 'react-native-progress-circle'
+import axios from 'axios';
+import Constant from '../Constants/constants';
+
+
+
+
 
 class Overview extends Component {
 
@@ -18,9 +24,114 @@ class Overview extends Component {
 
     }
 
+    constructor() {
+        super()
+        this.state = {
+            allTasks: [],
+            isLoading: true,
+            noRecord: false,
+            isData: false
+        }
+    }
+
+
+
     openDrawer() {
         this.props.navigation.openDrawer()
     }
+
+
+    componentWillMount() {
+        this.getAllTask()
+    }
+
+
+    handleLoading() {
+        return (
+            <Spinner
+                color="white"
+            />
+        )
+    }
+
+
+    getAllTask() {
+        this.setState({ isLoading: true })
+        AsyncStorage.getItem(Constant.USER_DETAIL_KEY)
+            .then((res) => {
+                if (res) {
+                    var data = JSON.parse(res)
+                    var userId = data.employeeId
+                    axios.get(Constant.BASE_URL + Constant.GET_ALL_TASK_BY_ID + userId)
+                        .then((response) => {
+                            if (response.data.returnObj[0] !== undefined) {
+                                this.setState({ allTasks: response.data.returnObj, noRecord: false, isLoading: false, isData: true })
+                            }
+                            else {
+                                this.setState({ allTasks: [], noRecord: true, isLoading: false, isData: false })
+                            }
+                        })
+                }
+            })
+    }
+
+
+
+    handleData() {
+        return (
+            <Card style={styles.mainCard}>
+                <Text style={styles.message}>Alert! you have a dedline today</Text>
+                <Text note style={styles.date}>Assign by sabih on 23-Apr</Text>
+                <Text style={styles.description}>
+                    fix all ui bugs
+                                </Text>
+
+                <View style={{ marginLeft: 10, flexDirection: 'row' }}>
+
+
+                    <ProgressCircle
+                        percent={50}
+                        radius={20}
+                        borderWidth={3}
+                        color="#3399FF"
+                        shadowColor="#999"
+                        bgColor="#fff"
+
+                    >
+                        <Text style={{ fontSize: 12 }}>{'50%'}</Text>
+                    </ProgressCircle>
+
+                    <View style={{ marginLeft: 5, }}>
+
+                        <Text note>Deadline 25-April-2019  </Text>
+                        <Text note>Last updated on 11-April-2019</Text>
+                    </View>
+
+                </View>
+
+
+
+                <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }}>
+                    <Text uppercase={false}>Update Now</Text>
+                </Button>
+
+            </Card>
+
+        )
+    }
+
+
+    handleNoRecord() {
+        return (
+            <Container style={styles.noRecordStyle} >
+
+                <Text style={styles.noRecordText} >
+                    You have no task
+            </Text>
+            </Container>
+        )
+    }
+
 
     render() {
 
@@ -47,8 +158,26 @@ class Overview extends Component {
 
 
                 <LinearGradient colors={['#b3e5fc', '#03a9f4', '#039be5']} style={{ flex: 1 }}>
+
+                    {this.state.noRecord === true ? this.handleNoRecord() : null}
+
                     <Content>
-                        <Card style={styles.mainCard}>
+
+
+
+
+                        {this.state.isData === true ? this.handleData() : null}
+                        {this.state.isLoading === true ? this.handleLoading() : null}
+
+
+
+
+
+
+
+
+
+                        {/* <Card style={styles.mainCard}>
                             <Text style={styles.message}>Alert! you have a dedline today</Text>
                             <Text note style={styles.date}>Assign by sabih on 23-Apr</Text>
                             <Text style={styles.description}>
@@ -122,8 +251,7 @@ class Overview extends Component {
                                 <Text uppercase={false}>Update Now</Text>
                             </Button>
 
-                        </Card>
-
+                        </Card> */}
 
                     </Content>
 
@@ -135,7 +263,7 @@ class Overview extends Component {
 
 
 
-
+{/* 
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
 
@@ -179,7 +307,7 @@ class Overview extends Component {
                             </LinearGradient>
                         </Card>
 
-                    </View>
+                    </View> */}
 
 
                 </LinearGradient>
@@ -272,10 +400,22 @@ const styles = StyleSheet.create({
     },
     iconColor: {
         color: 'white'
+    },
+    noRecordStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
+    noRecordText: {
+        fontFamily: 'Cochin',
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
     }
 
 
 });
 
-//make this component available to the app
-export default Overview;
+export default Overview
+

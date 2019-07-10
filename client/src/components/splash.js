@@ -1,26 +1,10 @@
 import React, { Component } from 'react'
 import { StatusBar } from 'react-native'
 import { Spinner, Text } from "native-base"
-import Midware from "../../src/Store/Middleware/AuthMidware"
-import { connect } from "react-redux"
 import LinearGradient from 'react-native-linear-gradient';
-
-function mapStateToProps(state) {
-    console.log(state, 'state 321')
-    return {
-        authError: state.AuthReducer.userAuthError,
-        userAuthentic: state.AuthReducer.userAuthentic
-    }
-
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        checkAuth: () => {
-            dispatch(Midware.checkingForAuthentication())
-        }
-    }
-}
+import { AsyncStorage } from "react-native"
+import Constant from '../Constants/constants';
+ 
 
 
 class Splash extends Component {
@@ -38,23 +22,22 @@ class Splash extends Component {
     }
 
 
-    componentWillReceiveProps(prop) {
-        if (prop.authError) {
-            this.setState({ error: true })
-        }
-
-        if (prop.userAuthentic) {
-            this.setState({ validUser: true })
-        }
-    }
+    
 
 
     componentWillMount() {
-
-
-        this.props.checkAuth()
-        setTimeout(() => { this.navigateUser() }, 2000)
-
+        AsyncStorage.getItem(Constant.USER_DETAIL_KEY)
+        .then((responce) => {
+            console.log(responce)
+                if (responce) {
+                    this.setState({ validUser: true })
+                    this.navigateUser()
+                }
+                else {
+                    this.setState({ error: true })
+                    this.navigateUser()
+                }
+            })
     }
 
 
@@ -84,7 +67,7 @@ class Splash extends Component {
         )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Splash)
+export default  Splash
 
 const styles = {
     container: {

@@ -101,7 +101,7 @@ export default StyleSheet.create({
         marginLeft: "5%",
         borderRadius: 20,
         borderColor: 'white',
-        color:'white'
+        color: 'white'
     },
     buttonStyle: {
         justifyContent: 'center',
@@ -125,7 +125,7 @@ export default StyleSheet.create({
         borderRadius: 10,
         borderColor: 'white',
         borderWidth: 1,
-        marginRight: 5 
+        marginRight: 5
     },
     // image card end
 
@@ -133,12 +133,21 @@ export default StyleSheet.create({
         paddingVertical: 20,
 
     },
-    imageAttach:{
+    imageAttach: {
         width: 100,
         height: 100,
         borderRadius: 10,
         borderColor: 'white',
         borderWidth: 1,
+    },
+    red: {
+        backgroundColor: 'red'
+    },
+    blue: {
+        backgroundColor: 'blue'
+    },
+    green: {
+        backgroundColor: 'green'
     }
 
 

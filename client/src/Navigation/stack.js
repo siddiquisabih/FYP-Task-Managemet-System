@@ -38,6 +38,7 @@ const AppNavigator = createStackNavigator({
     },
 }, {
         headerMode: 'none',
+        // initialRouteName: 'SplashRoute'
         initialRouteName: 'DrawerRoute'
     })
 const Stack = createAppContainer(AppNavigator);

@@ -2,45 +2,76 @@ import {
     createStackNavigator,
     createAppContainer
 } from "react-navigation"
-import Signup from "../components/Auth/Signup"
-import Login from "../components/Auth/Login"
+// import Signup from "../components/Auth/Signup"
+// import Login from "../components/Auth/Login"
 import Splash from "../components/splash"
-import Drawer from "./Drawer"
-import UpdateTask from "../components/task/updateTask";
-import EditTask from "../components/task/editTask";
+import React from 'react'
+// import Drawer from "./Drawer"
+// import UpdateTask from "../components/task/updateTask";
+// import EditTask from "../components/task/editTask";
+
+import { Router, Scene, Stack, Drawer, Tabs, Actions } from "react-native-router-flux";
+const RouteFlux = (props) => {
+
+    return (
 
 
-const AppNavigator = createStackNavigator({
+
+        <Router >
 
 
-    SplashRoute: {
-        screen: Splash
-    },
+            <Scene key="root" hideNavBar >
 
-    LoginRoute: {
-        screen: Login
-    },
-    DrawerRoute: {
-        screen: Drawer,
-        navigationOptions: props => ({
-            header: false,
-        })
-    },
+                <Scene key="splash" path="" component={Splash} initial hideNavBar />
+            </Scene>
+        </Router >
 
-    updateTaskRoute: {
-        screen: UpdateTask
-    },
-    editTaskRoute: {
-        screen: EditTask
-    },
-    SignupRoute: {
-        screen: Signup
-    },
-}, {
-        headerMode: 'none',
-        // initialRouteName: 'SplashRoute'
-        initialRouteName: 'DrawerRoute'
-    })
-const Stack = createAppContainer(AppNavigator);
+    )
+}
+export default RouteFlux
 
-export default Stack
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const AppNavigator = createStackNavigator({
+
+
+//     SplashRoute: {
+//         screen: Splash
+//     },
+
+//     LoginRoute: {
+//         screen: Login
+//     },
+//     DrawerRoute: {
+//         screen: Drawer,
+//         navigationOptions: props => ({
+//             header: false,
+//         })
+//     },
+
+//     updateTaskRoute: {
+//         screen: UpdateTask
+//     },
+//     editTaskRoute: {
+//         screen: EditTask
+//     },
+//     SignupRoute: {
+//         screen: Signup
+//     },
+// }, {
+//         headerMode: 'none',
+//         // initialRouteName: 'SplashRoute'
+//         initialRouteName: 'DrawerRoute'
+//     })
+// const Stack = createAppContainer(AppNavigator);

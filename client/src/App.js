@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Container, Text, Button, Root } from "native-base"
 import Store from "./Store/index"
 import { Provider } from "react-redux"
-import Stack from "../src/Navigation/stack"
+import RouteFlux from "../src/Navigation/stack"
 
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
         return (
             <Provider store={Store}>
                 <Root>
-                    <Stack />
+                    <RouteFlux />
 
                 </Root>
             </Provider>

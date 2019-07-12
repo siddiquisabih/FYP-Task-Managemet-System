@@ -11,13 +11,13 @@ import Drawer from "./Drawer"
 const AppNavigator = createStackNavigator({
 
 
-    SplashRoute: {
-        screen: Splash
-    },
+    // SplashRoute: {
+    //     screen: Splash
+    // },
 
-    LoginRoute: {
-        screen: Login
-    },
+    // LoginRoute: {
+    //     screen: Login
+    // },
     DrawerRoute: {
         screen: Drawer,
         navigationOptions: props => ({
@@ -31,3 +31,4 @@ const AppNavigator = createStackNavigator({
 const Stack = createAppContainer(AppNavigator);
 
 export default Stack
+

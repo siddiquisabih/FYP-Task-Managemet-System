@@ -50,7 +50,6 @@ const AppNavigator = createDrawerNavigator({
     {
         contentOptions: {
             activeTintColor: "blue",
-
         },
     }
 

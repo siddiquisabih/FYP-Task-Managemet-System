@@ -31,6 +31,9 @@ class Constant {
 
     static GET_ALL_TASK_BY_ID = 'api/task/getAllTaskByEmpID/'
 
+    static UPLOAD_FILE = 'api/image/upload'
+
+
 }
 
 export default Constant

@@ -8,7 +8,8 @@ import styles from './styles'
 import axios from 'axios';
 
 import Constant from "../../Constants/constants"
-
+import FilePickerManager from 'react-native-file-picker';
+import { NavigationEvents } from 'react-navigation';
 class CreateTask extends Component {
 
 
@@ -24,8 +25,8 @@ class CreateTask extends Component {
     }
 
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             employeeList: [],
             filterList: [],
@@ -43,21 +44,26 @@ class CreateTask extends Component {
 
             taskTitle: '',
             taskDescription: '',
+            fileAttachment: []
 
         }
-
+        console.log(this.props)
     }
 
 
+
+    componentWillMount() {
+
+    }
+    componentWillUnmount() {
+        console.log('unmount')
+    }
 
 
     openDrawer() {
         this.props.navigation.openDrawer()
     }
 
-    componentWillMount() {
-        this.getAllEmployee()
-    }
 
 
 
@@ -169,7 +175,7 @@ class CreateTask extends Component {
     }
 
     getAllEmployee() {
-
+        console.log('call')
         AsyncStorage.getItem(Constant.USER_DETAIL_KEY)
             .then((response) => {
                 if (response) {
@@ -204,6 +210,8 @@ class CreateTask extends Component {
 
 
     createTask() {
+        console.log(this.state.fileAttachment)
+
         if (this.state.taskTitle.trim() == "") {
             return Toast.show({
                 text: 'Enter Task Title',
@@ -249,7 +257,39 @@ class CreateTask extends Component {
 
 
 
+    pickFile() {
+        FilePickerManager.showFilePicker(null, (response) => {
+            console.log('Response = ', response);
 
+            if (response.didCancel) {
+                console.log('User cancelled file picker');
+            }
+            else if (response.error) {
+                console.log('FilePickerManager Error: ', response.error);
+            }
+            else {
+
+                var formdata = new FormData()
+                formdata.append('name', 'avatar');
+                formdata.append('file', {
+                    uri: response.uri,
+                    type: response.type,
+                    name: response.fileName
+                })
+                console.log(Constant.BASE_URL, Constant.UPLOAD_FILE)
+                axios.post(Constant.BASE_URL + Constant.UPLOAD_FILE, formdata, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'multipart/form-data',
+                        'file': formdata
+                    }
+                })
+                    .then((res) => {
+                        this.state.fileAttachment.push(res.data.file)
+                    })
+            }
+        });
+    }
 
 
 
@@ -268,7 +308,10 @@ class CreateTask extends Component {
                 </Header>
 
 
+                <NavigationEvents
+                    onWillFocus={() => { this.getAllEmployee() }}
 
+                />
                 <LinearGradient colors={['#b39ddb', '#b39ddb', '#7e57c2']} style={{ flex: 1 }}>
 
                     <Content>
@@ -360,7 +403,14 @@ class CreateTask extends Component {
                         {this.handlePriorty()}
 
 
+                        <Text style={styles.label}>Add attchment (Optional) </Text>
 
+
+                        <Button onPress={this.pickFile.bind(this)} iconLeft rounded small style={styles.attachButton} >
+                            <Text>Pick File</Text>
+                        </Button>
+
+                        {this.state.fileAttachment.length > 0 ? <Text>{this.state.fileAttachment.length}</Text> : null}
 
 
 

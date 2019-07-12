@@ -148,6 +148,11 @@ export default StyleSheet.create({
     },
     green: {
         backgroundColor: 'green'
+    },
+
+    attachButton:{
+        marginLeft:15,
+        backgroundColor:'purple'
     }
 
 

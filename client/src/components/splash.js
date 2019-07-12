@@ -48,7 +48,7 @@ class Splash extends Component {
         }
 
         if (this.state.validUser) {
-            this.props.navigation.navigate("welcomeRoute")
+            this.props.navigation.navigate("DrawerRoute")
         }
     }
 

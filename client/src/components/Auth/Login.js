@@ -58,7 +58,7 @@ class Login extends Component {
                             AsyncStorage.setItem(Constant.USER_DETAIL_KEY, JSON.stringify(res.data.returnObj))
                                 .then(() => {
                                     this.setState({ loading: false })
-                                    this.props.navigation.navigate("welcomeRoute")
+                                    this.props.navigation.navigate("DrawerRoute")
                                 })
                         }
                         else {

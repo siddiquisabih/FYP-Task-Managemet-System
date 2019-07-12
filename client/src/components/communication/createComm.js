@@ -75,7 +75,7 @@ class CreateComm extends Component {
 
                         <Item style={styles.buttonStyle}>
 
-                            <Button success rounded >
+                            <Button success rounded onPress={()=>{this.props.navigation.navigate("task")}}>
                                 <Text>Create</Text>
                             </Button>
                         </Item>

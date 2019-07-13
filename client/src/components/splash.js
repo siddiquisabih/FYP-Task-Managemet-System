@@ -1,33 +1,19 @@
 import React, { Component } from 'react'
 import { StatusBar } from 'react-native'
 import { Spinner, Text } from "native-base"
-import Midware from "../../src/Store/Middleware/AuthMidware"
-import { connect } from "react-redux"
 import LinearGradient from 'react-native-linear-gradient';
+import { AsyncStorage } from "react-native"
+import Constant from '../Constants/constants';
+import { Actions } from "react-native-router-flux";
+import RouteKey from '../Constants/routesConstants';
 
-function mapStateToProps(state) {
-    console.log(state, 'state 321')
-    return {
-        authError: state.AuthReducer.userAuthError,
-        userAuthentic: state.AuthReducer.userAuthentic
-    }
-
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        checkAuth: () => {
-            dispatch(Midware.checkingForAuthentication())
-        }
-    }
-}
 
 
 class Splash extends Component {
 
-    static navigationOptions = {
-        header: false
-    }
+    // static navigationOptions = {
+    //     header: false
+    // }
 
     constructor() {
         super()
@@ -38,38 +24,34 @@ class Splash extends Component {
     }
 
 
-    componentWillReceiveProps(prop) {
-        if (prop.authError) {
-            this.setState({ error: true })
-        }
 
-        if (prop.userAuthentic) {
-            this.setState({ validUser: true })
-        }
-    }
 
 
     componentWillMount() {
-
-
-        this.props.checkAuth()
-        setTimeout(() => { this.navigateUser() }, 2000)
-
+        AsyncStorage.getItem(Constant.USER_DETAIL_KEY)
+            .then((responce) => {
+                console.log(responce)
+                if (responce) {
+                    this.setState({ validUser: true })
+                    this.navigateUser()
+                }
+                else {
+                    this.setState({ error: true })
+                    this.navigateUser()
+                }
+            })
     }
 
 
 
     navigateUser() {
         if (this.state.error) {
-            this.props.navigation.navigate("LoginRoute")
+            Actions[RouteKey.LOGIN]()
         }
-
         if (this.state.validUser) {
-            this.props.navigation.navigate("welcomeRoute")
+            Actions[RouteKey.DRAWER]()
         }
     }
-
-
     render() {
         return (
             <LinearGradient colors={['#b3e5fc', '#03a9f4', '#039be5']} style={styles.container}>
@@ -84,7 +66,7 @@ class Splash extends Component {
         )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Splash)
+export default Splash
 
 const styles = {
     container: {

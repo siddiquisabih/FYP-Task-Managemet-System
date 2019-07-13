@@ -1,28 +1,14 @@
 import React, { Component } from 'react'
-import { StatusBar, ImageBackground, BackHandler } from 'react-native'
-import { Container, Header, Icon, Content, Item, Input, Button, Text, Toast, Spinner, Left, Body, Right, Title } from 'native-base';
-import { connect } from "react-redux"
-import Midware from "../../Store/Middleware/AuthMidware"
+import { BackHandler } from 'react-native'
+import { Icon, Item, Input, Button, Text, Toast, Spinner } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
+import axios from 'axios'
+import Constant from '../../Constants/constants';
+import { AsyncStorage } from "react-native"
+import { Actions } from 'react-native-router-flux';
+import RouteKey from '../../Constants/routesConstants';
 
-function mapStateToProps(state) {
-    return {
-        componentState: state,
-        isLogin: state.AuthReducer.login,
-        isError: state.AuthReducer.loginError,
-        errorMessage: state.AuthReducer.loginErrorMessage,
 
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        loginUser: (data) => {
-            dispatch(Midware.Login(data))
-        }
-
-    }
-}
 
 class Login extends Component {
     constructor() {
@@ -35,9 +21,9 @@ class Login extends Component {
         }
     }
 
-    static navigationOptions = {
-        header: false
-    }
+    // static navigationOptions = {
+    //     header: false
+    // }
 
     componentWillMount() {
         console.disableYellowBox = true
@@ -54,31 +40,55 @@ class Login extends Component {
     componentWillUnmount() {
         BackHandler.removeEventListener('backPress');
     }
-    componentWillReceiveProps(prop) {
-        if (prop.isError) {
-            this.setState({ loading: false })
-        }
 
-        if (prop.isLogin) {
-            prop.navigation.navigate("welcomeRoute")
-        }
-
-
-    }
 
     Login() {
-        const userEmailAndPassword = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        if (userEmailAndPassword.email !== '' && userEmailAndPassword.password !== '') {
 
-            this.props.loginUser(userEmailAndPassword)
-            this.setState({ loading: true })
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+
+            const userEmailAndPassword = {
+                email: this.state.email,
+                password: this.state.password
+            }
+            if (userEmailAndPassword.email !== '' && userEmailAndPassword.password !== '') {
+                this.setState({ loading: true })
+                axios.post(Constant.BASE_URL + Constant.LOGIN, userEmailAndPassword)
+                    .then((res) => {
+                        console.log(res)
+                        if (res.data.success === true) {
+
+                            AsyncStorage.setItem(Constant.USER_DETAIL_KEY, JSON.stringify(res.data.returnObj))
+                                .then(() => {
+                                    this.setState({ loading: false })
+                                    // this.props.navigation.navigate("DrawerRoute")
+                                    Actions[RouteKey.DRAWER]()
+                                })
+                        }
+                        else {
+                            this.setState({ loading: false })
+                            Toast.show({
+                                text: res.data.message,
+                                position: 'bottom',
+                                buttonText: 'Okay',
+                                type: "danger",
+                                duration: 3000
+                            })
+                        }
+                    })
+            }
+            else {
+                Toast.show({
+                    text: 'Fill All Boxes!',
+                    position: 'bottom',
+                    buttonText: 'Okay',
+                    type: "danger",
+                    duration: 1000
+                })
+            }
         }
         else {
-            Toast.show({
-                text: 'Fill All Boxes!',
+            return Toast.show({
+                text: 'Invalid Email!',
                 position: 'bottom',
                 buttonText: 'Okay',
                 type: "danger",
@@ -145,7 +155,7 @@ class Login extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login
 const style = {
     buttonStyle: {
         justifyContent: 'center',

@@ -1,38 +1,30 @@
 import React, { Component } from 'react'
 import { Container, Icon } from 'native-base';
-import { connect } from "react-redux"
-import Midware from "../../Store/Middleware/AuthMidware"
-
-function mapStateToProps(state) {
-    return { state }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        lougoutUser: () => {
-            dispatch(Midware.Logout())
-        }
-    }
-}
+import { AsyncStorage } from "react-native"
+import Constant from '../../Constants/constants';
+ 
+ 
 
 class Logout extends Component {
 
 
     static navigationOptions = {
-        title : "Logout",
-        
-        drawerIcon:()=>{
+        title: "Logout",
+
+        drawerIcon: () => {
             return (
-                <Icon  name="ios-cog"/>
-            )}
-        
+                <Icon name="ios-cog" />
+            )
+        }
+
     }
 
     componentWillMount = () => {
-        this.props.lougoutUser()
-        this.props.navigation.navigate("LoginRoute")
-        console.disableYellowBox= true
-        
+        AsyncStorage.removeItem(Constant.USER_DETAIL_KEY)
+            .then((res) => {
+                this.props.navigation.navigate("LoginRoute")
+            })
+        console.disableYellowBox = true
     }
 
     render() {
@@ -43,4 +35,4 @@ class Logout extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout) 
+export default Logout 

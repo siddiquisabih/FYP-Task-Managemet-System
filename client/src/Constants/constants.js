@@ -6,11 +6,14 @@ class Constant {
 
 
 
-    static BASE_URL = 'http://192.168.1.107:3050' //laptop    
+    static BASE_URL = 'http://192.168.0.104:3050/' //laptop    
     // static BASE_URL = 'https://patient-server.herokuapp.com/' //live
-    // static BASE_URL = 'http://10.30.1.124:3050/' // office
+    // static BASE_URL = 'http://10.30.1.115:3050/' // office
+    // static BASE_URL = 'http://10.65.1.199:3050/' // university
+    
+    // static AUTH_LOCAL_KEY = 'auth'
+    static USER_DETAIL_KEY = "profileDetails"
 
-    static AUTH_LOCAL_KEY = 'auth'
 
 
     // Auth Apis
@@ -18,6 +21,18 @@ class Constant {
     static SIGNUP = 'api/signup'
     static LOGIN = 'api/login'
 
+
+
+
+    // employee
+
+    static GET_ALL_EMPLOYEE = 'api/employee/getAllEmployees/'
+
+    // task
+
+    static GET_ALL_TASK_BY_ID = 'api/task/getAllTaskByEmpID/'
+
+    static UPLOAD_FILE = 'api/image/upload'
 
 
 }

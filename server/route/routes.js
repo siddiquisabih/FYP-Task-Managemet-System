@@ -1,6 +1,7 @@
 var authControler = require("../controler/authControler")
 var taskControler = require("../controler/taskControler")
 var empControler = require("../controler/empControler")
+var uploadControler = require("../controler/fileUpload")
 
 module.exports = (app) => {
 
@@ -27,5 +28,7 @@ module.exports = (app) => {
     app.get('/api/employee/getAllEmployees/:employeeId', empControler.getAllEmployees)
 
 
+
+   
 
 }

@@ -49,7 +49,10 @@ module.exports = {
                     return res.send({ success: true, message: "successfully login", returnObj: foundObj })
 
                 }
-                res.send({ success: false, message: "Invalid email and password", returnObj: null })
+                else{
+                    res.send({ success: false, message: "Invalid email and password", returnObj: null })
+                }
+
             })
         }
         else {

@@ -3,6 +3,8 @@ package com.client;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.filepicker.FilePickerPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FilePickerPackage(),
+            new ImagePickerPackage(),
             new LinearGradientPackage(),
             new RNGestureHandlerPackage()
       );

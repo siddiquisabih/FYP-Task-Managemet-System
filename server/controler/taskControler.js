@@ -14,11 +14,9 @@ module.exports = {
         }
 
         else {
-
             task.create(req.body)
                 .then((data) => {
                     if (data) {
-
                         var objId = data._id.toString()
                         var tranID = objId.slice(objId.length - 5)
                         task.findByIdAndUpdate({ _id: data._id }, { $set: { tranID: tranID } }, function (err, doc) {
@@ -28,15 +26,17 @@ module.exports = {
                             }
                             else {
                                 var sendObj = data
-                                res.send({ success: 1, message: 'successfully created', returnObject: sendObj })
+                                res.send({ success: true, message: 'successfully created', returnObject: sendObj })
                             }
 
                         })
                     }
                     else {
-                        console.log('data nai hai')
                         res.send({ success: false, message: "can't create task", returnObj: null })
                     }
+                })
+                .catch((err) => {
+                    res.send({ success: false, message: err.message, returnObj: null })
                 })
         }
     },

@@ -6,23 +6,27 @@ import LinearGradient from 'react-native-linear-gradient';
 import ProgressCircle from 'react-native-progress-circle'
 import axios from 'axios';
 import Constant from '../Constants/constants';
+import { Actions } from 'react-native-router-flux';
+import RouteKey from '../Constants/routesConstants';
+import Global from '../Constants/globalFunc';
 
 
 
 
 
-class Overview extends Component {
+class
+    Overview extends Component {
 
-    static navigationOptions = {
-        title: "Overview",
+    // static navigationOptions = {
+    //     title: "Overview",
 
-        drawerIcon: () => {
-            return (
-                <Icon name="ios-cog" />
-            )
-        }
+    //     drawerIcon: () => {
+    //         return (
+    //             <Icon name="ios-cog" />
+    //         )
+    //     }
 
-    }
+    // }
 
     constructor() {
         super()
@@ -37,7 +41,9 @@ class Overview extends Component {
 
 
     openDrawer() {
-        this.props.navigation.openDrawer()
+        // this.props.navigation.openDrawer()
+
+        Actions[RouteKey.DRAWER]()
     }
 
 
@@ -64,7 +70,18 @@ class Overview extends Component {
                     var userId = data.employeeId
                     axios.get(Constant.BASE_URL + Constant.GET_ALL_TASK_BY_ID + userId)
                         .then((response) => {
+                            console.log(response)
                             if (response.data.returnObj[0] !== undefined) {
+
+                                // convertServerDate
+                                response.data.returnObj.map((m, v) => {
+                                    if (m.lastUpdate) {
+                                        m.lastUpdateCustom = Global.convertServerDate(m.lastUpdate)
+                                        m.createdDateCustom = Global.convertServerDate(m.createdDate)
+                                        m.endDateCustom = Global.convertUserDate(m.endDate)
+                                    }
+                                })
+
                                 this.setState({ allTasks: response.data.returnObj, noRecord: false, isLoading: false, isData: true })
                             }
                             else {
@@ -78,48 +95,68 @@ class Overview extends Component {
 
 
     handleData() {
+        console.log(this.state.allTasks)
         return (
-            <Card style={styles.mainCard}>
-                <Text style={styles.message}>Alert! you have a dedline today</Text>
-                <Text note style={styles.date}>Assign by sabih on 23-Apr</Text>
-                <Text style={styles.description}>
-                    fix all ui bugs
+            <View>
+                {
+                    this.state.allTasks.map((m, v) => {
+                        return (
+
+
+                            <Card style={styles.mainCard} key={v}>
+                                <Text style={styles.message}>Alert! you have a pending task</Text>
+                                <Text note style={styles.date}>Assign by {m.createdBy} on {m.createdDateCustom}</Text>
+                                <Text style={styles.description}>
+                                    {m.taskTitle}
                                 </Text>
 
-                <View style={{ marginLeft: 10, flexDirection: 'row' }}>
+                                <View style={{ marginLeft: 10, flexDirection: 'row' }}>
 
 
-                    <ProgressCircle
-                        percent={50}
-                        radius={20}
-                        borderWidth={3}
-                        color="#3399FF"
-                        shadowColor="#999"
-                        bgColor="#fff"
+                                    <ProgressCircle
+                                        percent={m.progress}
+                                        radius={20}
+                                        borderWidth={3}
+                                        color="#3399FF"
+                                        shadowColor="#999"
+                                        bgColor="#fff"
 
-                    >
-                        <Text style={{ fontSize: 12 }}>{'50%'}</Text>
-                    </ProgressCircle>
+                                    >
+                                        <Text style={{ fontSize: 12 }}>{m.progress + '%'}</Text>
+                                    </ProgressCircle>
 
-                    <View style={{ marginLeft: 5, }}>
+                                    <View style={{ marginLeft: 5, }}>
 
-                        <Text note>Deadline 25-April-2019  </Text>
-                        <Text note>Last updated on 11-April-2019</Text>
-                    </View>
+                                        <Text note>Deadline {m.endDateCustom}  </Text>
+                                        <Text note>Last updated on {m.lastUpdateCustom}</Text>
+                                    </View>
 
-                </View>
+                                </View>
 
 
 
-                <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }}>
-                    <Text uppercase={false}>Update Now</Text>
-                </Button>
+                                <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }} onPress={this.updateTask.bind(this, m)}>
+                                    <Text uppercase={false}>Update Now</Text>
+                                </Button>
 
-            </Card>
+                            </Card>
 
+                        )
+                    })
+                }
+            </View>
         )
+
+
+
+
+
     }
 
+    updateTask(data) {
+        console.log(data)
+        Actions[RouteKey.UPDATE_TASK]({ data: data })
+    }
 
     handleNoRecord() {
         return (
@@ -263,7 +300,7 @@ class Overview extends Component {
 
 
 
-{/* 
+                    {/* 
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
 

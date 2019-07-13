@@ -4,23 +4,33 @@ import { Textarea, Button, Input, Content, Body, Container, Header, Title, Card,
 import styles from './styles'
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-picker';
+import { Actions } from 'react-native-router-flux';
 
 
 
 class UpdateTask extends Component {
 
 
-    constructor() {
+    constructor(props) {
         super()
         this.state = {
-            percentage: 40
+            percentage: 0,
+            taskDetail: {},
+            attachments: []
         }
     }
 
     goBack() {
-        this.props.navigation.pop()
+        // this.props.navigation.pop()
+        Actions.pop()
     }
 
+
+    componentDidMount() {
+        console.log(this.props.data)
+
+        this.setState({ taskDetail: this.props.data, percentage: this.props.data.progress, attachments: this.props.data.taskAttachment })
+    }
 
 
 
@@ -67,6 +77,37 @@ class UpdateTask extends Component {
 
 
 
+    showAttachments() {
+
+        return (
+            <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
+
+
+                <View style={[styles.imageCard, { marginLeft: 10 }]} onPress={this.show.bind(this)}>
+                    <Text style={[styles.number, { fontSize: 20, fontWeight: 'bold' }]}>+</Text>
+                </View>
+                {
+
+                    this.state.attachments.map((m, v) => {
+                        return (
+                            <View key={v} style={[styles.imageCard]} >
+                                <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
+                            </View>
+                        )
+                    })
+                }
+
+            </ScrollView>
+
+
+
+
+
+        )
+
+
+    }
+
 
 
 
@@ -110,34 +151,22 @@ class UpdateTask extends Component {
 
                         <Text style={styles.label}>Attachment (optional) </Text>
 
-                        <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
+                        {/* <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
 
 
                             <View style={[styles.imageCard, { marginLeft: 10 }]} onPress={this.show.bind(this)}>
                                 <Text style={[styles.number, { fontSize: 20, fontWeight: 'bold' }]}>+</Text>
                             </View>
-                            <View style={[styles.imageCard]} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
-                            </View>
 
-                            <View style={[styles.imageCard]} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
-                            </View>
 
                             <View style={[styles.imageCard]} >
                                 <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
-                            </View>
+                            </View> */}
 
-                            <View style={[styles.imageCard]} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
-                            </View>
-
-                            <View style={[styles.imageCard]} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
-                            </View>
+                        {this.showAttachments()}
 
 
-                        </ScrollView>
+                        {/* </ScrollView> */}
 
 
 

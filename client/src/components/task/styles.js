@@ -150,10 +150,25 @@ export default StyleSheet.create({
         backgroundColor: 'green'
     },
 
-    attachButton:{
-        marginLeft:15,
-        backgroundColor:'purple'
+    attachButton: {
+        marginLeft: 15,
+        backgroundColor: 'purple'
+    },
+    imageDeleteView: {
+        flexDirection: 'row',
+        alignContent: 'center'
+    },
+    attachImage: {
+        width: 50,
+        height: 50,
+        margin: 10
+    },
+    deleteImageIcon: {
+        alignSelf: "center",
+        color: 'red'
     }
+
+
 
 
 

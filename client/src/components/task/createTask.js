@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, AsyncStorage } from 'react-native'
+import { View, AsyncStorage, Image } from 'react-native'
 import { Textarea, Button, Input, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon, Item, Thumbnail, Toast } from 'native-base';
 import DatePicker from 'react-native-datepicker'
 import LinearGradient from 'react-native-linear-gradient';
@@ -9,6 +9,8 @@ import axios from 'axios';
 
 import Constant from "../../Constants/constants"
 import FilePickerManager from 'react-native-file-picker';
+import { Actions } from "react-native-router-flux"
+
 class CreateTask extends Component {
 
 
@@ -43,7 +45,9 @@ class CreateTask extends Component {
 
             taskTitle: '',
             taskDescription: '',
-            fileAttachment: []
+            fileAttachment: [],
+            fileUploaded: false,
+            fileCount: 0
 
         }
         console.log(this.props)
@@ -52,15 +56,7 @@ class CreateTask extends Component {
 
 
     componentWillMount() {
-
-    }
-    componentWillUnmount() {
-        console.log('unmount')
-    }
-
-
-    openDrawer() {
-        // this.props.navigation.openDrawer()
+        this.getAllEmployee()
     }
 
 
@@ -254,6 +250,31 @@ class CreateTask extends Component {
 
     }
 
+    openDrawer() {
+        Actions.drawerOpen()
+    }
+
+    countFile() {
+        console.log('yai chala')
+        // return (
+        // <Text style={{ marginLeft: 5, alignSelf: 'center', color: 'white' }}>{this.state.fileCount}</Text>
+
+        this.state.fileAttachment.map((m, v) => {
+            return (
+                < Image src={Constant.IMAGE_URL_PATH + m.fileName} style={{ width: 15 }} />
+
+            )
+        })
+
+
+        // )
+    }
+
+
+
+    deleteImage(index) {
+        this.fileAttachment.splice(index, 0)
+    }
 
 
     pickFile() {
@@ -285,11 +306,34 @@ class CreateTask extends Component {
                 })
                     .then((res) => {
                         this.state.fileAttachment.push(res.data.file)
+                        this.setState({ fileUploaded: true, fileCount: this.state.fileAttachment })
                     })
             }
         });
     }
 
+    renderAttachImages() {
+        console.log(this.state.fileAttachment)
+
+        return (
+            <View style={styles.imageDeleteView}>
+                {
+                    this.state.fileAttachment.map((m, v) => {
+                        return (
+                            < View style={styles.imageDeleteView} key={v}>
+                                < Image source={{ uri: Constant.BASE_URL + Constant.IMAGE_URL_PATH + m.filename }} style={styles.attachImage} />
+                                <Icon name='trash' style={styles.deleteImageIcon} onPress={this.deleteImage.bind(this, v)} />
+                            </View >
+
+                        )
+                    })
+                }
+            </View>
+        )
+
+
+
+    }
 
 
 
@@ -401,11 +445,24 @@ class CreateTask extends Component {
                         <Text style={styles.label}>Add attchment (Optional) </Text>
 
 
-                        <Button onPress={this.pickFile.bind(this)} iconLeft rounded small style={styles.attachButton} >
-                            <Text>Pick File</Text>
-                        </Button>
+                        <View style={{ flexDirection: 'row' }}>
 
-                        {this.state.fileAttachment.length > 0 ? <Text>{this.state.fileAttachment.length}</Text> : null}
+                            <Button onPress={this.pickFile.bind(this)} iconLeft rounded small style={styles.attachButton} >
+                                <Text>Pick File</Text>
+                            </Button>
+
+                            {/* {this.countFile()} */}
+
+                        </View>
+
+
+
+
+                        {this.renderAttachImages()}
+
+
+
+                        {/* </View> */}
 
 
 

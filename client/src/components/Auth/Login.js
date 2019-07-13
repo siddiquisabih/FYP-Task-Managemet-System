@@ -55,9 +55,9 @@ class Login extends Component {
                 axios.post(Constant.BASE_URL + Constant.LOGIN, userEmailAndPassword)
                     .then((res) => {
                         console.log(res)
-                        if (res.data.success === true) {
+                        if (res.data) {
 
-                            AsyncStorage.setItem(Constant.USER_DETAIL_KEY, JSON.stringify(res.data.returnObj))
+                            AsyncStorage.setItem(Constant.USER_DETAIL_KEY, JSON.stringify(res.data))
                                 .then(() => {
                                     this.setState({ loading: false })
                                     // this.props.navigation.navigate("DrawerRoute")

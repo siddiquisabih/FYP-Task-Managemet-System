@@ -12,7 +12,7 @@ import EditTask from "../components/task/editTask";
 
 import { Router, Scene, Stack, Drawer, Tabs, Actions } from "react-native-router-flux";
 // import CreateTask from "../components/task/createTask";
-import ConstantKey from "../Constants/routesConstants";
+import RouteKey from "../Constants/routesConstants";
 
 
 import CreateTask from "../components/task/createTask";
@@ -38,24 +38,24 @@ const RouteFlux = (props) => {
 
             <Scene key="root" hideNavBar >
 
-                <Scene key={ConstantKey.SPLASH} type="reset" component={Splash} initial hideNavBar />
-                <Scene key={ConstantKey.LOGIN} component={Login} hideNavBar />
-                <Scene key={ConstantKey.UPDATE_TASK} component={UpdateTask} hideNavBar />
-                <Scene key={ConstantKey.EDIT_TASK} component={EditTask} hideNavBar />
+                <Scene key={RouteKey.SPLASH} type="reset" component={Splash} initial hideNavBar />
+                <Scene key={RouteKey.LOGIN} component={Login} hideNavBar />
+                <Scene key={RouteKey.UPDATE_TASK} component={UpdateTask} hideNavBar />
+                <Scene key={RouteKey.EDIT_TASK} component={EditTask} hideNavBar />
 
 
-                <Drawer key={ConstantKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
-                    {/* <Scene key={ConstantKey.OVERVIEW} component={Overview} initial hideNavBar /> */}
+                <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
+                    {/* <Scene key={RouteKey.OVERVIEW} component={Overview} initial hideNavBar /> */}
                     <Scene>
 
-                        <Scene key={ConstantKey.OVERVIEW} component={Overview} initial hideNavBar />
-                        <Scene key={ConstantKey.TASK_LIST} component={TaskList} hideNavBar />
-                        <Scene key={ConstantKey.USER_PROFILE} component={UserProfile} hideNavBar />
-                        <Scene key={ConstantKey.CREATE_COMM} component={CreateComm} hideNavBar />
-                        <Scene key={ConstantKey.COMM_LIST} component={CommList} hideNavBar />
-                        <Scene key={ConstantKey.CHAT_ROOM} component={ChatRoom} hideNavBar />
-                        <Scene key={ConstantKey.CREATE_TASK} component={CreateTask} hideNavBar />
-                        <Scene key={ConstantKey.LOGOUT} component={Logout} hideNavBar />
+                        <Scene key={RouteKey.OVERVIEW}  component={Overview}  hideNavBar  />
+                        <Scene key={RouteKey.CREATE_TASK}  component={CreateTask} hideNavBar  initial/>
+                        <Scene key={RouteKey.TASK_LIST}  component={TaskList} hideNavBar />
+                        <Scene key={RouteKey.USER_PROFILE} component={UserProfile} hideNavBar />
+                        <Scene key={RouteKey.CREATE_COMM} component={CreateComm} hideNavBar />
+                        <Scene key={RouteKey.COMM_LIST} component={CommList} hideNavBar />
+                        <Scene key={RouteKey.CHAT_ROOM} component={ChatRoom} hideNavBar />
+                        <Scene key={RouteKey.LOGOUT} component={Logout} hideNavBar />
                     </Scene>
 
                 </Drawer>

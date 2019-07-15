@@ -39,6 +39,8 @@ class Constant {
 
     static CREATE_TASK = 'api/task/create'
 
+    static UPDATE_TASK = 'api/task/update'
+
 
 }
 

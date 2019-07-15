@@ -18,6 +18,7 @@ module.exports = (app) => {
     app.post('/api/task/create', taskControler.createTask)
     app.post('/api/task/update', taskControler.updateTask)
     app.get('/api/task/getAllTaskByEmpID/:employeeId', taskControler.getAllTaskByEmpID)
+    app.get('/api/task/getAllByYouTask/:employeeId', taskControler.getAllTaskByYou)
 
 
     // app.get('/api/task/getAll/',taskControler.getAllTask)
@@ -29,6 +30,6 @@ module.exports = (app) => {
 
 
 
-   
+
 
 }

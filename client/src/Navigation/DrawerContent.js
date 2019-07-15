@@ -18,7 +18,7 @@ export default class DrawerContent extends Component {
           <Button block style={{ marginBottom: 15, }} onPress={() => Actions[RouteKey.CREATE_TASK]()}>
             <Text>Create Task</Text>
           </Button>
-          <Button block style={{ marginBottom: 15, }}>
+          <Button block style={{ marginBottom: 15, }} onPress={() => Actions[RouteKey.TASK_LIST]()}>
             <Text>Task List</Text>
           </Button>
           <Button block style={{ marginBottom: 15, }}>

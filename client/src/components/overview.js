@@ -125,10 +125,10 @@ class
                         return (
 
 
-                            <Card style={styles.mainCard} key={v}>
+                            <Card style={styles.mainCard} key={v} >
                                 <Text style={styles.message}>Alert! you have a pending task</Text>
                                 <Text note style={styles.date}>Assign by {m.createdBy} on {m.createdDateCustom}</Text>
-                                <Text style={styles.description}>
+                                <Text style={styles.description} onPress={this.viewDetail.bind(this)}>
                                     {m.taskTitle}
                                 </Text>
 
@@ -190,6 +190,12 @@ class
             </Container>
         )
     }
+
+
+    viewDetail(data) {
+        console.log('this is clicked')
+    }
+
 
 
     render() {

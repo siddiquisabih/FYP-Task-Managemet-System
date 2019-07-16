@@ -35,6 +35,7 @@ class UpdateTask extends Component {
     componentDidMount() {
         console.log(this.props.data)
 
+        this.setState({ fileUploaded: true, fileCount: this.state.fileAttachment })
         this.setState({ taskDetail: this.props.data, percentage: this.props.data.progress, attachments: this.props.data.taskAttachment })
     }
 

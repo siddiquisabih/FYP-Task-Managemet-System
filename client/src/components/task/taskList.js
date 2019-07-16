@@ -35,7 +35,14 @@ class TaskList extends Component {
             allTasks: [],
             isLoading: true,
             noRecord: false,
-            isData: false
+            isData: false,
+
+            allTasksByYou: [],
+            isLoadingByYou: true,
+            noRecordByYou: false,
+            isDataByYou: false,
+
+
         }
     }
 
@@ -48,6 +55,63 @@ class TaskList extends Component {
 
     componentWillMount() {
         this.getAllTask()
+        this.getAllByYouTask()
+    }
+
+
+    getAllByYouTask() {
+        // 
+
+        this.setState({ isLoadingByYou: true })
+        AsyncStorage.getItem(Constant.USER_DETAIL_KEY)
+            .then((res) => {
+                if (res) {
+                    var data = JSON.parse(res)
+                    var userId = data.employeeId
+                    axios.get(Constant.BASE_URL + Constant.GET_ALL_TASK_BY_YOU + userId)
+                        .then((response) => {
+                            console.log(response, 'byYou Data')
+                            if (response.data.returnObj[0] !== undefined) {
+
+                                var tempData = []
+                                // convertServerDate
+                                response.data.returnObj.map((m, v) => {
+                                    if (m.progress < 100) {
+                                        if (m.lastUpdate) {
+                                            m.lastUpdateCustom = Global.convertServerDate(m.lastUpdate)
+                                            m.createdDateCustom = Global.convertServerDate(m.createdDate)
+                                            m.endDateCustom = Global.convertUserDate(m.endDate)
+                                            tempData.push(m)
+                                        }
+                                    }
+                                })
+
+                                if (tempData[0] !== undefined) {
+                                    this.setState({ allTasksByYou: tempData, noRecordByYou: false, isLoadingByYou: false, isDataByYou: true })
+                                }
+                                else {
+                                    this.setState({ allTasksByYou: [], noRecordByYou: true, isLoadingByYou: false, isDataByYou: false })
+                                }
+                            }
+                            else {
+                                this.setState({ allTasksByYou: [], noRecordByYou: true, isLoadingByYou: false, isDataByYou: false })
+                                console.log('call')
+                            }
+                        })
+                        .catch(() => {
+                            Toast.show({
+                                text: 'Check your network',
+                                position: 'bottom',
+                                buttonText: 'Okay',
+                                type: "danger",
+                                duration: 3000
+                            })
+                        })
+                }
+            })
+
+
+
     }
 
 
@@ -106,6 +170,15 @@ class TaskList extends Component {
         console.log(data)
         Actions[RouteKey.UPDATE_TASK]({ data: data })
     }
+
+
+    eidtTask(data) {
+
+        console.log(JSON.stringify(data, undefined, 2))
+
+        Actions[RouteKey.EDIT_TASK]({ data: data })
+    }
+
 
     handleData() {
 
@@ -166,17 +239,87 @@ class TaskList extends Component {
             <Container style={styles.noRecordStyle} >
 
                 <Text style={styles.noRecordText} >
-                    You have no daily updates
+                    You have no task updates
             </Text>
             </Container>
         )
     }
+
+
+
+    handleNoRecordByYou() {
+        return (
+            <Container style={styles.noRecordStyle} >
+
+                <Text style={styles.noRecordText} >
+                    You did't assign task yet
+            </Text>
+            </Container>
+        )
+    }
+
 
     handleLoading() {
         return (
             <Spinner
                 color="white"
             />
+        )
+    }
+
+
+
+    handleByYouData() {
+
+        return (
+            <View>
+                {
+                    this.state.allTasksByYou.map((m, v) => {
+                        return (
+
+
+                            <Card style={styles.mainCard} key={v}>
+                                <Text style={styles.messageByYou}>You assign a new task</Text>
+                                <Text note style={styles.date}>Assigned to {m.employeeName} on {m.createdDateCustom}</Text>
+                                <Text style={styles.description}>
+                                    {m.taskTitle}
+                                </Text>
+
+                                <View style={{ marginLeft: 10, flexDirection: 'row' }}>
+
+
+                                    <ProgressCircle
+                                        percent={m.progress}
+                                        radius={20}
+                                        borderWidth={3}
+                                        color="#3399FF"
+                                        shadowColor="#999"
+                                        bgColor="#fff"
+
+                                    >
+                                        <Text style={{ fontSize: 12 }}>{m.progress + '%'}</Text>
+                                    </ProgressCircle>
+
+                                    <View style={{ marginLeft: 5, }}>
+
+                                        <Text note>Deadline {m.endDateCustom}  </Text>
+                                        <Text note>Last updated on {m.lastUpdateCustom}</Text>
+                                    </View>
+
+                                </View>
+
+
+
+                                <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }} onPress={this.eidtTask.bind(this, m)}>
+                                    <Text uppercase={false}>Edit Now</Text>
+                                </Button>
+
+                            </Card>
+
+                        )
+                    })
+                }
+            </View>
         )
     }
 
@@ -249,9 +392,14 @@ class TaskList extends Component {
 
                         <LinearGradient colors={['#b2dfdb', '#80cbc4', '#4db6ac']} style={{ flex: 1 }}>
 
+                            {this.state.noRecordByYou === true ? this.handleNoRecordByYou() : null}
                             <Content padder>
 
-                                <Card style={styles.mainCard}>
+                                {this.state.isDataByYou === true ? this.handleByYouData() : null}
+                                {this.state.isLoadingByYou === true ? this.handleLoading() : null}
+
+
+                                {/* <Card style={styles.mainCard}>
                                     <Text style={styles.message}>Alert! you have a dedline today</Text>
                                     <Text note style={styles.date}>Assign by sabih on 23-Apr</Text>
                                     <Text style={styles.description}>
@@ -287,7 +435,7 @@ class TaskList extends Component {
                                         <Text uppercase={false} >Edit Now</Text>
                                     </Button>
 
-                                </Card>
+                                </Card> */}
 
                             </Content>
 

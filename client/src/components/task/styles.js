@@ -166,7 +166,26 @@ export default StyleSheet.create({
     deleteImageIcon: {
         alignSelf: "center",
         color: 'red'
-    }
+    },
+    noRecordStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
+    noRecordText: {
+        fontFamily: 'Cochin',
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    messageByYou: {
+        paddingLeft: 10,
+        paddingTop: 10,
+        fontFamily: 'Cochin',
+        // fontWeight: 'bold',
+        color: 'blue'
+    },
 
 
 

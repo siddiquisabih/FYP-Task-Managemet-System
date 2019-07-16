@@ -11,6 +11,7 @@ import Constant from "../../Constants/constants"
 import FilePickerManager from 'react-native-file-picker';
 import { Actions } from "react-native-router-flux"
 import RouteKey from '../../Constants/routesConstants';
+import Global from '../../Constants/globalFunc';
 
 
 
@@ -37,8 +38,8 @@ class CreateTask extends Component {
             searchText: '',
             selectedEmployee: {},
             isEmpSelected: false,
-            startDate: new Date(),
-            endDate: new Date(),
+            startDate: '',
+            endDate: '',
             priorityId: 0,
             priority: [
                 { name: 'HIGH', id: 1 },
@@ -60,10 +61,29 @@ class CreateTask extends Component {
 
     componentWillMount() {
         this.getAllEmployee()
+        this.initialDate()
     }
 
 
 
+    initialDate() {
+
+
+        var current = new Date()
+
+        var day = current.getDate()
+        var month = current.getMonth() + 1
+        var year = current.getFullYear()
+        var monthString = month <= 9 ? '0' + month : month
+        var dayString = day <= 9 ? '0' + day : day
+        var format = dayString + '-' + monthString + '-' + year
+        this.setState({
+            startDate: format,
+            endDate: format
+        })
+
+
+    }
 
 
 
@@ -258,6 +278,7 @@ class CreateTask extends Component {
         var data = {
             Id: "",
             employeeId: this.state.selectedEmployee.employeeId,
+            employeeName: this.state.selectedEmployee.name,
             taskTitle: this.state.taskTitle,
             description: this.state.taskDescription,
             createdByID: this.state.loginUserDetail.employeeId,

@@ -110,32 +110,7 @@ module.exports = {
 
     },
 
-
-
-
-
-    login: (req, res, next) => {
-
-        const email = req.body.email
-        const password = req.body.password
-
-        auth.findOne({ email: email }, (err, found) => {
-
-            if (err) {
-                return next(err)
-            }
-
-            if (found && found.password === password && found.email === email) {
-
-                return res.send(found)
-
-            }
-
-            res.send({ error: "Invalid Username, Email And Password" })
-
-        })
-
-    }
+ 
 
 }
 

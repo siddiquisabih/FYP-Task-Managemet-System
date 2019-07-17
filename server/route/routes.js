@@ -1,7 +1,7 @@
 var authControler = require("../controler/authControler")
 var taskControler = require("../controler/taskControler")
 var empControler = require("../controler/empControler")
-var uploadControler = require("../controler/fileUpload")
+var chatControler = require("../controler/chatController")
 
 module.exports = (app) => {
 
@@ -29,6 +29,14 @@ module.exports = (app) => {
     app.get('/api/employee/getAllEmployees/:employeeId', empControler.getAllEmployees)
 
 
+
+    // communication 
+
+    app.post('/api/create/chat', chatControler.createChat)
+    app.get('/api/chat/toYou/getByEmpId/:employeeId', chatControler.getToYouChat)
+    app.get('/api/chat/byYou/getByEmpId/:createdId', chatControler.getByYouChat)
+
+    app.post('/api/chat/sendMessage/:tranId', chatControler.sendMessage)
 
 
 

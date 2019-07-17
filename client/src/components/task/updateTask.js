@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { View, Image, Slider, ScrollView } from 'react-native';
-import { Textarea, Button, Input, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon, Item, Thumbnail, Tab, Tabs, TabHeading } from 'native-base';
+import { Textarea, Button, Input, Content, Body, Container, Header, Title, Card, CardItem, Right, Text, Left, Icon, Item, Thumbnail, Tab, Tabs, TabHeading, Toast, Spinner } from 'native-base';
 import styles from './styles'
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-picker';
 import { Actions } from 'react-native-router-flux';
+import Constant from '../../Constants/constants';
+import axios from 'axios';
+import RouteKey from '../../Constants/routesConstants';
+import FilePickerManager from 'react-native-file-picker';
 
 
 
@@ -16,7 +20,9 @@ class UpdateTask extends Component {
         this.state = {
             percentage: 0,
             taskDetail: {},
-            attachments: []
+            attachments: [],
+            description: '',
+            loading: false
         }
     }
 
@@ -29,6 +35,7 @@ class UpdateTask extends Component {
     componentDidMount() {
         console.log(this.props.data)
 
+        this.setState({ fileUploaded: true, fileCount: this.state.fileAttachment })
         this.setState({ taskDetail: this.props.data, percentage: this.props.data.progress, attachments: this.props.data.taskAttachment })
     }
 
@@ -75,6 +82,146 @@ class UpdateTask extends Component {
 
 
 
+    updateTask() {
+
+        if (this.state.description.trim() == "") {
+            return Toast.show({
+                text: 'Enter task description',
+                position: 'bottom',
+                buttonText: 'Okay',
+                type: "danger",
+                duration: 3000
+            })
+        }
+
+
+        this.setState({ loading: true })
+
+        var data = this.state.taskDetail
+        data.taskAttachment = this.state.attachments
+        data.progress = this.state.percentage
+        data.description = this.state.description
+        console.log(data)
+
+        axios.post(Constant.BASE_URL + Constant.UPDATE_TASK, data)
+            .then((res) => {
+                console.log(res)
+                if (res.data.success === true) {
+                    Toast.show({
+                        text: 'Task updated successfully',
+                        position: 'bottom',
+                        buttonText: 'Okay',
+                        type: "success",
+                        duration: 3000
+                    })
+                    setTimeout(() => {
+                        Actions[RouteKey.DRAWER]()
+                    }, 3000);
+                    this.setState({ loading: false })
+                }
+                else {
+                    this.setState({ loading: false })
+
+                }
+            })
+            .catch((err) => {
+                this.setState({ loading: false })
+                Toast.show({
+                    text: 'Check your network',
+                    position: 'bottom',
+                    buttonText: 'Okay',
+                    type: "danger",
+                    duration: 3000
+                })
+            })
+
+    }
+
+
+    renderButton() {
+        if (this.state.loading === true) {
+            return (
+                <Spinner />
+            )
+        }
+        else {
+            return (
+                <Item style={styles.buttonStyle}>
+                    <Button info rounded onPress={this.updateTask.bind(this)} >
+                        <Text>update</Text>
+                    </Button>
+                </Item>
+            )
+        }
+    }
+
+
+    deleteImage(index) {
+        var temp = this.state.attachments
+        temp.splice(index, 1)
+        this.setState({ attachments: temp })
+    }
+
+
+
+
+    pickFile() {
+        console.log('click')
+        FilePickerManager.showFilePicker(null, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled file picker');
+            }
+            else if (response.error) {
+                console.log('FilePickerManager Error: ', response.error);
+            }
+            else {
+
+                var formdata = new FormData()
+                formdata.append('name', 'avatar');
+                formdata.append('file', {
+                    uri: response.uri,
+                    type: response.type,
+                    name: response.fileName
+                })
+                console.log(Constant.BASE_URL, Constant.UPLOAD_FILE)
+                this.setState({ loading: true })
+                axios.post(Constant.BASE_URL + Constant.UPLOAD_FILE, formdata, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'multipart/form-data',
+                        'file': formdata
+                    }
+                })
+                    .then((res) => {
+                        this.setState({ loading: false })
+
+                        var temp = this.state.attachments
+                        temp.unshift(res.data.file)
+                        this.setState({ attachments: temp })
+                    })
+                    .catch(() => {
+                        this.setState({ loading: false })
+                        Toast.show({
+                            text: "Can't upload file",
+                            position: 'bottom',
+                            buttonText: 'Okay',
+                            type: "danger",
+                            duration: 3000
+                        })
+                    })
+            }
+        });
+    }
+
+
+
+
+
+
+
+
 
 
     showAttachments() {
@@ -83,15 +230,19 @@ class UpdateTask extends Component {
             <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
 
 
-                <View style={[styles.imageCard, { marginLeft: 10 }]} onPress={this.show.bind(this)}>
-                    <Text style={[styles.number, { fontSize: 20, fontWeight: 'bold' }]}>+</Text>
+                <View style={[styles.imageCard, { marginLeft: 10 }]} >
+                    <Text onPress={this.pickFile.bind(this)} style={[styles.number, { fontSize: 20, fontWeight: 'bold' }]}>+</Text>
                 </View>
                 {
 
                     this.state.attachments.map((m, v) => {
                         return (
-                            <View key={v} style={[styles.imageCard]} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc1.jpg')} />
+                            <View key={v}>
+
+                                <View style={[styles.imageCard]} >
+                                    <Image style={[styles.imageAttach]} source={{ uri: Constant.BASE_URL + Constant.IMAGE_URL_PATH + m.filename }} />
+                                </View>
+                                <Text style={{ textAlign: 'center', color: 'red' }} onPress={this.deleteImage.bind(this, v)}> Delete</Text>
                             </View>
                         )
                     })
@@ -134,7 +285,7 @@ class UpdateTask extends Component {
                     <Content>
 
                         <Text style={styles.label}>Description about progress </Text>
-                        <Textarea style={styles.textarea} rowSpan={5} bordered placeholder="write description" placeholderTextColor='white' />
+                        <Textarea onChangeText={(text) => { this.setState({ description: text }) }} style={styles.textarea} rowSpan={5} bordered placeholder="write description" placeholderTextColor='white' />
 
                         <Text style={styles.label}>What is your task progress? </Text>
                         <Text style={styles.label}>{this.state.percentage}% updated </Text>
@@ -169,13 +320,7 @@ class UpdateTask extends Component {
                         {/* </ScrollView> */}
 
 
-
-                        <Item style={styles.buttonStyle}>
-
-                            <Button info rounded >
-                                <Text>update</Text>
-                            </Button>
-                        </Item>
+                        {this.renderButton()}
 
                     </Content>
                 </LinearGradient>

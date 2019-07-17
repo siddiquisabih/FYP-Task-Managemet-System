@@ -24,6 +24,9 @@ class Global {
 
 
     static convertUserDate(date) {
+
+        console.log('yai date arhi hain ', date)
+
         if (date) {
             var splitDate = date.split('-')
             var month = parseInt(splitDate[1])

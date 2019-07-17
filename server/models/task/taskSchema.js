@@ -57,6 +57,9 @@ const head = new Schema({
     employeeId: {
         type: String
     },
+    employeeName: {
+        type: String
+    },
     taskTitle: {
         type: String
     },

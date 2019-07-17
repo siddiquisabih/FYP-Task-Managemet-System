@@ -23,6 +23,7 @@ import UserProfile from "../components/profile/userProfile";
 import CreateComm from '../components/communication/createComm'
 import CommList from '../components/communication/commList'
 import ChatRoom from '../components/communication/chatRoom'
+import TaskDetail from "../components/task/taskDetail";
 // import { Icon } from 'native-base';
 
 
@@ -38,10 +39,11 @@ const RouteFlux = (props) => {
 
             <Scene key="root" hideNavBar >
 
-                <Scene key={RouteKey.SPLASH} type="reset" component={Splash} initial hideNavBar />
+                <Scene key={RouteKey.SPLASH} type="reset" component={Splash} hideNavBar initial />
                 <Scene key={RouteKey.LOGIN} component={Login} hideNavBar />
                 <Scene key={RouteKey.UPDATE_TASK} component={UpdateTask} hideNavBar />
                 <Scene key={RouteKey.EDIT_TASK} component={EditTask} hideNavBar />
+                <Scene key={RouteKey.TASK_DETAIL} component={TaskDetail} hideNavBar />
 
 
                 <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>

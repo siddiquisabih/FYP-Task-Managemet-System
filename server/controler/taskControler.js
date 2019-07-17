@@ -93,6 +93,27 @@ module.exports = {
     },
 
 
+
+    getAllTaskByYou: (req, res, next) => {
+
+        const employeeId = req.params.employeeId
+
+        task.find({ createdByID: employeeId }).then(data => {
+            if (data.length == 0) {
+                res.send({ success: true, message: "You have no daily updates", returnObj: data })
+            } else {
+                res.send({ success: true, message: "task list", returnObj: data })
+            }
+        }).catch(er => {
+            res.send({ success: false, message: "error", returnObj: er })
+        })
+
+    },
+
+
+
+
+
     login: (req, res, next) => {
 
         const email = req.body.email

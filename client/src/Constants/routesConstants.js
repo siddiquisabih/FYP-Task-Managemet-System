@@ -31,6 +31,8 @@ class RouteKey {
 
     static CREATE_TASK = 'createTask'
 
+    static TASK_DETAIL = 'taskDetail'
+
 
 
 }

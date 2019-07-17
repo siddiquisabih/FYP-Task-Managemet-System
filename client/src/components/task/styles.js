@@ -166,7 +166,62 @@ export default StyleSheet.create({
     deleteImageIcon: {
         alignSelf: "center",
         color: 'red'
-    }
+    },
+    noRecordStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
+    noRecordText: {
+        fontFamily: 'Cochin',
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    messageByYou: {
+        paddingLeft: 10,
+        paddingTop: 10,
+        fontFamily: 'Cochin',
+        // fontWeight: 'bold',
+        color: 'blue'
+    },
+
+    headingDetail: {
+        fontFamily: 'Cochin',
+        fontWeight: 'bold',
+        color: 'black',
+        padding: 10,
+        // fontSize: 30
+
+    },
+    detailAns: {
+        fontFamily: 'Cochin',
+        // fontWeight: 'bold',
+        color: 'white',
+        // textAlign: 'center'
+        paddingTop: 5,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 10
+        // fontSize: 30
+
+    },
+
+    imageCardTaskDetail: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 100,
+        height: 100,
+        borderRadius: 10,
+        borderColor: 'white',
+        borderWidth: 1,
+        marginRight: 5,
+        marginLeft: 10,
+    },
+
+
 
 
 

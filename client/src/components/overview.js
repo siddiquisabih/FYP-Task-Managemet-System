@@ -1,12 +1,12 @@
 //import liraries
 import React, { Component } from 'react';
 import { StyleSheet, View, AsyncStorage } from 'react-native';
-import { Button, Content, Body, Container, Header, Title, Card, Right, Text, Left, Icon, Spinner } from 'native-base';
+import { Button, Content, Body, Container, Header, Title, Card, Right, Text, Left, Icon, Spinner, Toast } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import ProgressCircle from 'react-native-progress-circle'
 import axios from 'axios';
 import Constant from '../Constants/constants';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import RouteKey from '../Constants/routesConstants';
 import Global from '../Constants/globalFunc';
 
@@ -43,7 +43,8 @@ class
     openDrawer() {
         // this.props.navigation.openDrawer()
 
-        Actions[RouteKey.DRAWER]()
+        // Actions[RouteKey.DRAWER]()
+        Actions.drawerOpen()
     }
 
 
@@ -73,20 +74,41 @@ class
                             console.log(response)
                             if (response.data.returnObj[0] !== undefined) {
 
+                                var temp = []
                                 // convertServerDate
                                 response.data.returnObj.map((m, v) => {
-                                    if (m.lastUpdate) {
-                                        m.lastUpdateCustom = Global.convertServerDate(m.lastUpdate)
-                                        m.createdDateCustom = Global.convertServerDate(m.createdDate)
-                                        m.endDateCustom = Global.convertUserDate(m.endDate)
+                                    if (m.progress < 100) {
+                                        if (m.lastUpdate) {
+                                            m.lastUpdateCustom = Global.convertServerDate(m.lastUpdate)
+                                            m.createdDateCustom = Global.convertServerDate(m.createdDate)
+                                            m.endDateCustom = Global.convertUserDate(m.endDate)
+                                            temp.push(m)
+                                        }
                                     }
                                 })
 
-                                this.setState({ allTasks: response.data.returnObj, noRecord: false, isLoading: false, isData: true })
+                                if (temp[0] !== undefined) {
+                                    this.setState({ allTasks: temp, noRecord: false, isLoading: false, isData: true })
+                                }
+                                else {
+                                    this.setState({ allTasks: [], noRecord: true, isLoading: false, isData: false })
+                                }
                             }
                             else {
                                 this.setState({ allTasks: [], noRecord: true, isLoading: false, isData: false })
+                                console.log('call')
                             }
+                        })
+                        .catch(() => {
+
+
+                            Toast.show({
+                                text: 'Check your network',
+                                position: 'bottom',
+                                buttonText: 'Okay',
+                                type: "danger",
+                                duration: 3000
+                            })
                         })
                 }
             })
@@ -103,10 +125,10 @@ class
                         return (
 
 
-                            <Card style={styles.mainCard} key={v}>
+                            <Card style={styles.mainCard} key={v} >
                                 <Text style={styles.message}>Alert! you have a pending task</Text>
                                 <Text note style={styles.date}>Assign by {m.createdBy} on {m.createdDateCustom}</Text>
-                                <Text style={styles.description}>
+                                <Text style={styles.description} onPress={this.viewDetail.bind(this)}>
                                     {m.taskTitle}
                                 </Text>
 
@@ -163,11 +185,17 @@ class
             <Container style={styles.noRecordStyle} >
 
                 <Text style={styles.noRecordText} >
-                    You have no task
+                    You have no daily updates
             </Text>
             </Container>
         )
     }
+
+
+    viewDetail(data) {
+        console.log('this is clicked')
+    }
+
 
 
     render() {
@@ -196,15 +224,15 @@ class
 
                 <LinearGradient colors={['#b3e5fc', '#03a9f4', '#039be5']} style={{ flex: 1 }}>
 
+
                     {this.state.noRecord === true ? this.handleNoRecord() : null}
-
                     <Content>
-
-
-
 
                         {this.state.isData === true ? this.handleData() : null}
                         {this.state.isLoading === true ? this.handleLoading() : null}
+
+
+
 
 
 

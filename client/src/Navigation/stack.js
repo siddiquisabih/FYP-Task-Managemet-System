@@ -44,19 +44,19 @@ const RouteFlux = (props) => {
                 <Scene key={RouteKey.UPDATE_TASK} component={UpdateTask} hideNavBar />
                 <Scene key={RouteKey.EDIT_TASK} component={EditTask} hideNavBar />
                 <Scene key={RouteKey.TASK_DETAIL} component={TaskDetail} hideNavBar />
-
+                <Scene key={RouteKey.CHAT_ROOM} component={ChatRoom} hideNavBar />
 
                 <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
                     {/* <Scene key={RouteKey.OVERVIEW} component={Overview} initial hideNavBar /> */}
                     <Scene>
 
-                        <Scene key={RouteKey.OVERVIEW} component={Overview} hideNavBar initial />
+                        <Scene key={RouteKey.OVERVIEW} component={Overview} hideNavBar />
                         <Scene key={RouteKey.CREATE_TASK} component={CreateTask} hideNavBar />
                         <Scene key={RouteKey.TASK_LIST} component={TaskList} hideNavBar />
                         <Scene key={RouteKey.USER_PROFILE} component={UserProfile} hideNavBar />
                         <Scene key={RouteKey.CREATE_COMM} component={CreateComm} hideNavBar />
-                        <Scene key={RouteKey.COMM_LIST} component={CommList} hideNavBar />
-                        <Scene key={RouteKey.CHAT_ROOM} component={ChatRoom} hideNavBar />
+                        <Scene key={RouteKey.COMM_LIST} component={CommList} hideNavBar initial />
+
                         <Scene key={RouteKey.LOGOUT} component={Logout} hideNavBar />
                     </Scene>
 

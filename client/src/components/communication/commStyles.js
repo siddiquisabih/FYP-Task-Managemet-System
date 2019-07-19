@@ -201,7 +201,9 @@ export default StyleSheet.create({
         borderRadius: 10,
         borderColor: 'blue',
         color: 'white',
-        width: "60%"
+        width: "60%",
+        
+
     },
 
     userTextImage: {
@@ -229,8 +231,36 @@ export default StyleSheet.create({
     timeText: {
         fontSize: 15,
         textAlign: 'center',
-        color: 'gray',
+        color: 'black',
+    },
+    attachButton: {
+        marginLeft: 15,
+        backgroundColor: 'purple'
+    },
+    imageDeleteView: {
+        flexDirection: 'row',
+        alignContent: 'center'
+    },
+    attachImage: {
+        width: 50,
+        height: 50,
+        margin: 10
+    },
+    deleteImageIcon: {
+        alignSelf: "center",
+        color: 'red'
     },
 
-
+    noRecordStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
+    noRecordText: {
+        fontFamily: 'Cochin',
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
 })

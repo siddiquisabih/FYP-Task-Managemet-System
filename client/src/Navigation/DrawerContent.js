@@ -21,11 +21,11 @@ export default class DrawerContent extends Component {
           <Button block style={{ marginBottom: 15, }} onPress={() => Actions[RouteKey.TASK_LIST]()}>
             <Text>Task List</Text>
           </Button>
-          <Button block style={{ marginBottom: 15, }}>
-            <Text>Info</Text>
+          <Button block style={{ marginBottom: 15, }} onPress={() => Actions[RouteKey.CREATE_COMM]()}>
+            <Text>Create Chat</Text>
           </Button>
-          <Button block style={{ marginBottom: 15, }}>
-            <Text>Warning</Text>
+          <Button block style={{ marginBottom: 15, }} onPress={() => Actions[RouteKey.COMM_LIST]()}>
+            <Text>Chat List</Text>
           </Button>
           <Button block style={{ marginBottom: 15, }}>
             <Text>Danger</Text>

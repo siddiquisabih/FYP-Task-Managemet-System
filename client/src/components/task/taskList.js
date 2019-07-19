@@ -399,43 +399,7 @@ class TaskList extends Component {
                                 {this.state.isLoadingByYou === true ? this.handleLoading() : null}
 
 
-                                {/* <Card style={styles.mainCard}>
-                                    <Text style={styles.message}>Alert! you have a dedline today</Text>
-                                    <Text note style={styles.date}>Assign by sabih on 23-Apr</Text>
-                                    <Text style={styles.description}>
-                                        complete main ui home page
-                                </Text>
 
-                                    <View style={{ marginLeft: 10, flexDirection: 'row' }}>
-
-
-                                        <ProgressCircle
-                                            percent={50}
-                                            radius={20}
-                                            borderWidth={3}
-                                            color="#3399FF"
-                                            shadowColor="#999"
-                                            bgColor="#fff"
-
-                                        >
-                                            <Text style={{ fontSize: 12 }}>{'50%'}</Text>
-                                        </ProgressCircle>
-
-                                        <View style={{ marginLeft: 5, }}>
-
-                                            <Text note>Deadline 25-April-2019  </Text>
-                                            <Text note>Last updated on 11-April-2019</Text>
-                                        </View>
-
-                                    </View>
-
-
-
-                                    <Button rounded light small style={styles.updateButton} >
-                                        <Text uppercase={false} >Edit Now</Text>
-                                    </Button>
-
-                                </Card> */}
 
                             </Content>
 

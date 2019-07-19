@@ -11,6 +11,9 @@ const members = new Schema({
     employeeName: {
         type: String
     },
+    imageUrl: {
+        type: String
+    }
 
 })
 
@@ -22,6 +25,9 @@ const messageModal = new Schema({
         type: String
     },
     message: {
+        type: String
+    },
+    imageUrl: {
         type: String
     },
     createdDate: {
@@ -46,6 +52,9 @@ const messageHead = new Schema({
         type: String
     },
     createdBy: {
+        type: String
+    },
+    imageUrlCreatedBy: {
         type: String
     },
     createdDate: {

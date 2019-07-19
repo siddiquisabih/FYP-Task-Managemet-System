@@ -132,7 +132,7 @@ class CreateTask extends Component {
                                 <CardItem >
                                     <Left>
                                         {/* <Thumbnail source={{ uri: '../images/doc.jpg' }} /> */}
-                                        <Thumbnail source={require('../../images/doc.jpg')} />
+                                        <Thumbnail source={{ uri: Constant.BASE_URL + Constant.IMAGE_URL_PATH + m.imageUrl }} />
                                         <Text>{m.name}</Text>
                                     </Left>
 
@@ -165,7 +165,7 @@ class CreateTask extends Component {
             <CardItem style={{ backgroundColor: 'transparent', borderWidth: 0, borderColor: 'transparent' }}>
                 <Left>
                     {/* <Thumbnail source={{ uri: '../images/doc.jpg' }} /> */}
-                    <Thumbnail source={require('../../images/doc.jpg')} />
+                    <Thumbnail source={{ uri: Constant.BASE_URL + Constant.IMAGE_URL_PATH + this.state.selectedEmployee.imageUrl }} />
                     <Text style={{ color: 'white' }}>{this.state.selectedEmployee.name}</Text>
                 </Left>
                 <Right>
@@ -316,7 +316,7 @@ class CreateTask extends Component {
                     })
                     setTimeout(() => {
                         Actions[RouteKey.TASK_LIST]()
-                    }, 3000);
+                    }, 1000);
                 }
                 else {
                     this.setState({ loading: false })

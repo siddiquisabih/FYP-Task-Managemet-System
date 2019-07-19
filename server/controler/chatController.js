@@ -34,6 +34,7 @@ module.exports = {
                                         employeeId: detail.createdByID,
                                         employeeName: detail.createdBy,
                                         message: detail.message,
+                                        imageUrl : detail.imageUrlCreatedBy
                                     }
                                 }
                                 message.create(createMessage)
@@ -66,7 +67,6 @@ module.exports = {
                 if (data) {
                     var temp = []
                     Promise.all(data.map((m) => {
-                        console.log(m)
 
                         if (m.chatMembers[0] !== undefined) {
                             m.chatMembers.map((list) => {
@@ -138,8 +138,24 @@ module.exports = {
 
                 res.send({ success: false, message: "Can't find chat", returnObj: [] })
             })
-    }
+    },
 
+
+    getChatByTranId: (req, res, next) => {
+        const tranId = req.params.tranId
+
+
+        message.findOne({ tranID: tranId })
+            .then((response) => {
+                res.send({ success: true, message: "found Chat", returnObj: response })
+
+            })
+            .catch((err) => {
+
+                res.send({ success: false, message: err.message, returnObj: [] })
+            })
+
+    }
 
 
     // updateTask: (req, res, next) => {

@@ -116,7 +116,7 @@ class UpdateTask extends Component {
                     })
                     setTimeout(() => {
                         Actions[RouteKey.DRAWER]()
-                    }, 3000);
+                    }, 1000);
                     this.setState({ loading: false })
                 }
                 else {

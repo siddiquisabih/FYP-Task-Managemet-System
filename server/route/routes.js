@@ -36,6 +36,7 @@ module.exports = (app) => {
     app.get('/api/chat/toYou/getByEmpId/:employeeId', chatControler.getToYouChat)
     app.get('/api/chat/byYou/getByEmpId/:createdId', chatControler.getByYouChat)
 
+    app.get('/api/chat/getChatByTranId/:tranId', chatControler.getChatByTranId)
     app.post('/api/chat/sendMessage/:tranId', chatControler.sendMessage)
 
 

@@ -6,9 +6,9 @@ class Constant {
 
 
 
-    static BASE_URL = 'http://192.168.0.104:3050/' //laptop    
+    // static BASE_URL = 'http://192.168.0.104:3050/' //laptop    
     // static BASE_URL = 'https://patient-server.herokuapp.com/' //live
-    // static BASE_URL = 'http://10.30.1.115:3050/' // office
+    static BASE_URL = 'http://10.30.1.115:3050/' // office
     // static BASE_URL = 'http://10.65.1.199:3050/' // university
 
     // static AUTH_LOCAL_KEY = 'auth'
@@ -43,6 +43,16 @@ class Constant {
 
     static UPDATE_TASK = 'api/task/update'
 
+
+    static CREATE_CHAT = 'api/create/chat'
+
+    static GET_CHAT_TO_YOU = 'api/chat/toYou/getByEmpId/'
+
+    static GET_CHAT_BTY_YOU = 'api/chat/byYou/getByEmpId/'
+
+    static GET_CHAT_MESSAGES = 'api/chat/getChatByTranId/'
+
+    static SEND_MESSAGE = 'api/chat/sendMessage/'
 
 }
 

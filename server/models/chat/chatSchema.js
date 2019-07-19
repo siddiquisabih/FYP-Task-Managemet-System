@@ -11,6 +11,9 @@ const members = new Schema({
     employeeName: {
         type: String
     },
+    imageUrl:{
+        type: String
+    }
 
 })
 
@@ -26,6 +29,9 @@ const chatHead = new Schema({
         type: String
     },
     createdByID: {
+        type: String
+    },
+    imageUrlCreatedBy: {
         type: String
     },
     createdBy: {

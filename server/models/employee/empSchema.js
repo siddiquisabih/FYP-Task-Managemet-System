@@ -77,6 +77,16 @@ const empHead = new Schema({
     password: {
         type: String
     },
+    // addition
+    fullName: {
+        type: String
+    },
+    designation: {
+        type: String
+    },
+    isAdmin: {
+        type: Boolean
+    }
 })
 
 const employee = mongoose.model("employee", empHead)

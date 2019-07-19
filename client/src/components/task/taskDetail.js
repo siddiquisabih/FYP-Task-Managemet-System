@@ -17,10 +17,59 @@ import RouteKey from '../../Constants/routesConstants';
 class TaskDetail extends Component {
 
 
+    constructor() {
+        super()
+        this.state = {
+            detailData: {},
+            attachments: [],
+            isAttachment: false,
+
+        }
+    }
+
 
     goBack() {
         // this.props.navigation.pop()
         Actions.pop()
+    }
+
+
+
+    componentWillMount() {
+        console.log(this.props.data)
+
+        if (this.props.data.taskAttachment[0] !== undefined) {
+
+            this.setState({ detailData: this.props.data, attachments: this.props.data.taskAttachment, isAttachment: true })
+        }
+        else {
+
+            this.setState({ detailData: this.props.data, attachments: this.props.data.taskAttachment, isAttachment: false })
+        }
+
+
+    }
+
+    showAttachments() {
+
+        return (
+            <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
+                {
+
+                    this.state.attachments.map((m, v) => {
+                        return (
+                            <View key={v}>
+                                <View style={styles.imageCardTaskDetail} >
+                                    <Image style={[styles.imageAttach]} source={{ uri: Constant.BASE_URL + Constant.IMAGE_URL_PATH + m.filename }} />
+                                </View>
+                            </View>
+                        )
+                    })
+                }
+            </ScrollView>
+        )
+
+
     }
 
 
@@ -47,63 +96,55 @@ class TaskDetail extends Component {
 
 
                         <Text style={styles.headingDetail}>Task Title :</Text>
-                        <Text style={styles.detailAns}>this is title   </Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.taskTitle} </Text>
 
 
 
 
                         <Text style={styles.headingDetail}>Task Description :</Text>
-                        <Text style={styles.detailAns}>this is some descriptionthis is some description this is some   </Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.description}   </Text>
 
 
 
 
                         <Text style={styles.headingDetail}>Starts Date :</Text>
-                        <Text style={styles.detailAns}>20-july-2019   </Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.startDateCustom}   </Text>
 
 
                         <Text style={styles.headingDetail}>Deadline :</Text>
-                        <Text style={styles.detailAns}>23-july-2019   </Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.endDateCustom}   </Text>
 
 
                         <Text style={styles.headingDetail}>Task Priority :</Text>
-                        <Text style={styles.detailAns}> LOW   </Text>
+                        <Text style={styles.detailAns}>
+                            {this.state.detailData.priority === 1 ? 'High'
+                                : this.state.detailData.priority === 2 ? 'Medium'
+                                    : this.state.detailData.priority === 3 ? 'Low' : null
+                            }
+                        </Text>
 
 
                         <Text style={styles.headingDetail}>Current Progress :</Text>
-                        <Text style={styles.detailAns}>20%</Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.progress}%</Text>
 
 
                         <Text style={styles.headingDetail}>Assign By :</Text>
-                        <Text style={styles.detailAns}>Sabih siddiqui</Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.createdBy}</Text>
+
+
+                        <Text style={styles.headingDetail}>Assign To :</Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.employeeName}</Text>
 
 
                         <Text style={styles.headingDetail}>Assigned on :</Text>
-                        <Text style={styles.detailAns}>12-feb-2018</Text>
+                        <Text style={styles.detailAns}>{this.state.detailData.createdDateCustom}</Text>
 
 
 
                         <Text style={styles.headingDetail}>Attachments :</Text>
 
 
-
-                        <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
-                            <View style={styles.imageCardTaskDetail} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
-                            </View>
-                            <View style={styles.imageCardTaskDetail} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
-                            </View>
-                            <View style={styles.imageCardTaskDetail} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
-                            </View>
-                            <View style={styles.imageCardTaskDetail} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
-                            </View>
-                            <View style={styles.imageCardTaskDetail} >
-                                <Image style={[styles.imageAttach]} source={require('../../images/doc.jpg')} />
-                            </View>
-                        </ScrollView>
+                        {this.state.isAttachment === true ? this.showAttachments() : 'No attachment available '}
 
 
 

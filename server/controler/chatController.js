@@ -30,13 +30,18 @@ module.exports = {
                                     isDelete: false,
                                     tranID: tranID,
                                     chatMembers: detail.chatMembers,
+                                    imageUrlCreatedBy: detail.imageUrlCreatedBy,
                                     message: {
                                         employeeId: detail.createdByID,
                                         employeeName: detail.createdBy,
                                         message: detail.message,
-                                        imageUrl : detail.imageUrlCreatedBy
+                                        imageUrl: detail.imageUrlCreatedBy
                                     }
                                 }
+
+                                console.log('to be creating ', createMessage)
+
+
                                 message.create(createMessage)
                                     .then((respon) => {
                                         var sendObj = detail

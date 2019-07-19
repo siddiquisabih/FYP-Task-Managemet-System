@@ -57,6 +57,12 @@ class ChatRoom extends Component {
                 if (response.data.returnObj) {
                     console.log(response, 'Chat')
                     var data = response.data.returnObj
+                    var createdByDetail = {
+                        employeeId: data.createdByID,
+                        employeeName: data.createdBy,
+                        imageUrl: data.imageUrlCreatedBy,
+                    }
+                    data.chatMembers.unshift(createdByDetail)
                     this.setState({ chatMembers: data.chatMembers, chatMessage: data.message, isLoading: false })
 
                 }

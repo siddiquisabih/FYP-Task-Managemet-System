@@ -1,24 +1,47 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, AsyncStorage } from 'react-native'
 import { Button, Content, Body, Container, Header, Title, Card, Right, Text, Left, Icon, Tab, Tabs, TabHeading } from 'native-base';
 import styles from './profileStyles'
 import LinearGradient from 'react-native-linear-gradient';
+import { Actions } from 'react-native-router-flux';
+import Constant from '../../Constants/constants';
+
+
+
 
 class UserProfile extends Component {
-    static navigationOptions = {
-        title: "Profile",
 
-        drawerIcon: () => {
-            return (
-                <Icon name="ios-cog" />
-            )
+
+
+    constructor() {
+        super()
+        this.state = {
+            userDetail: {}
         }
     }
 
+    componentWillMount() {
+        this.getUserDetail()
+    }
     openDrawer() {
-        this.props.navigation.openDrawer()
+        // this.props.navigation.openDrawer()
+        Actions.drawerOpen()
     }
 
+
+
+
+
+    getUserDetail() {
+        AsyncStorage.getItem(Constant.USER_DETAIL_KEY)
+            .then((res) => {
+                if (res) {
+                    var data = JSON.parse(res)
+                    console.log(data)
+                    this.setState({ userDetail: data })
+                }
+            })
+    }
     render() {
         return (
             <Container>
@@ -50,14 +73,14 @@ class UserProfile extends Component {
 
                             <Card style={styles.pendingCard}>
                                 <View style={styles.gradientBox}  >
-                                    <Image style={styles.userImage} source={require("../../images/copy.jpg")} />
+                                    <Image style={styles.userImage} source={{ uri: Constant.BASE_URL + Constant.IMAGE_URL_PATH + this.state.userDetail.imageUrl }} />
                                 </View>
                             </Card>
                         </View>
 
 
-                        <View><Text style={styles.userName} >Sabih Siddiqui</Text></View>
-                        <View><Text style={styles.userName} >Application Developer</Text></View>
+                        <View><Text style={styles.userName} >{this.state.userDetail.fullname}</Text></View>
+                        <View><Text style={styles.userName} >{this.state.userDetail.designation}</Text></View>
 
 
 
@@ -70,19 +93,19 @@ class UserProfile extends Component {
                                 <Text style={styles.gridText} >Email</Text>
                             </View>
                             <View style={styles.gridCellValue}>
-                                <Text style={styles.gridTextvalue} >SiddiquiSabih94@gmail.com</Text>
+                                <Text style={styles.gridTextvalue} >{this.state.userDetail.email}</Text>
                             </View>
 
 
                         </View>
-                       
+
                         <View
                             style={styles.gridCol}>
                             <View style={styles.gridCell}>
                                 <Text style={styles.gridText} >Status</Text>
                             </View>
                             <View style={styles.gridCellValue}>
-                                <Text style={styles.gridTextvalue} >Intern</Text>
+                                <Text style={styles.gridTextvalue} >{this.state.userDetail.status}</Text>
                             </View>
 
 
@@ -104,7 +127,7 @@ class UserProfile extends Component {
                                 <Text style={styles.gridText} >Salary</Text>
                             </View>
                             <View style={styles.gridCellValue}>
-                                <Text style={styles.gridTextvalue} >65,000</Text>
+                                <Text style={styles.gridTextvalue} >{this.state.userDetail.salary}</Text>
                             </View>
 
 

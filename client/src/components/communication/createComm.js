@@ -436,12 +436,12 @@ class CreateComm extends Component {
 
 
 
-                        <Text style={styles.label}>Add attchment (Optional) </Text>
+                        {/* <Text style={styles.label}>Add attchment (Optional) </Text>
                         <View style={{ flexDirection: 'row' }}>
                             <Button onPress={this.pickFile.bind(this)} iconLeft rounded small style={styles.attachButton} >
                                 <Text>Pick File</Text>
                             </Button>
-                        </View>
+                        </View> */}
 
 
                         {this.renderAttachImages()}

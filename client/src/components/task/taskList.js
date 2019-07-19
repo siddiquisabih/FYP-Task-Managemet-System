@@ -81,6 +81,7 @@ class TaskList extends Component {
                                             m.lastUpdateCustom = Global.convertServerDate(m.lastUpdate)
                                             m.createdDateCustom = Global.convertServerDate(m.createdDate)
                                             m.endDateCustom = Global.convertUserDate(m.endDate)
+                                            m.startDateCustom = Global.convertUserDate(m.startDate)
                                             tempData.push(m)
                                         }
                                     }
@@ -136,6 +137,7 @@ class TaskList extends Component {
                                             m.lastUpdateCustom = Global.convertServerDate(m.lastUpdate)
                                             m.createdDateCustom = Global.convertServerDate(m.createdDate)
                                             m.endDateCustom = Global.convertUserDate(m.endDate)
+                                            m.startDateCustom = Global.convertUserDate(m.startDate)
                                             temp.push(m)
                                         }
                                     }
@@ -171,6 +173,11 @@ class TaskList extends Component {
         Actions[RouteKey.UPDATE_TASK]({ data: data })
     }
 
+
+    taskDetail(data) {
+        console.log(data)
+        Actions[RouteKey.TASK_DETAIL]({ data: data })
+    }
 
     eidtTask(data) {
 
@@ -220,10 +227,15 @@ class TaskList extends Component {
                                 </View>
 
 
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
 
-                                <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }} onPress={this.updateTask.bind(this, m)}>
-                                    <Text uppercase={false}>Update Now</Text>
-                                </Button>
+                                    <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15, marginRight: 15, }} onPress={this.updateTask.bind(this, m)}>
+                                        <Text uppercase={false}>Update Now</Text>
+                                    </Button>
+                                    <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15, }} onPress={this.taskDetail.bind(this, m)}>
+                                        <Text uppercase={false}>Detail</Text>
+                                    </Button>
+                                </View>
 
                             </Card>
 
@@ -310,10 +322,17 @@ class TaskList extends Component {
 
 
 
-                                <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }} onPress={this.eidtTask.bind(this, m)}>
-                                    <Text uppercase={false}>Edit Now</Text>
-                                </Button>
 
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+
+                                    <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15, marginRight: 15 }} onPress={this.eidtTask.bind(this, m)}>
+                                        <Text uppercase={false}>Edit Now</Text>
+                                    </Button>
+
+                                    <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15 }} onPress={this.taskDetail.bind(this, m)}>
+                                        <Text uppercase={false}>Detail</Text>
+                                    </Button>
+                                </View>
                             </Card>
 
                         )

@@ -21,14 +21,15 @@ class Logout extends Component {
 
     // }
 
-    componentWillMount = () => {
+    componentWillMount() {
         AsyncStorage.removeItem(Constant.USER_DETAIL_KEY)
             .then((res) => {
                 // this.props.navigation.navigate("LoginRoute")
-                Actions[RouteKey.LOGIN]()
+                Actions[RouteKey.SPLASH]()
             })
         console.disableYellowBox = true
     }
+
 
     render() {
         return (

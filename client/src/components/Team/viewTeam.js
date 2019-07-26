@@ -30,9 +30,61 @@ export default class ViewTeam extends Component {
 
     componentWillMount() {
         this.getAllMemberList()
+        this.getLoginUser()
     }
 
+
+
+    getLoginUser() {
+        AsyncStorage.getItem(Constant.USER_DETAIL_KEY)
+            .then((response) => {
+                if (response) {
+                    console.log('details ', response)
+                    var detail = JSON.parse(response)
+                    this.setState({ loginUserDetail: detail })
+                }
+            })
+    }
+
+    handleLoading() {
+        return (
+            <Spinner
+                color="white"
+            />
+        )
+    }
+
+    deleteMember(id) {
+        this.setState({ isLoading: true, isData: false })
+        console.log(Constant.BASE_URL + Constant.DELETE_MEMBER + this.props.data + '/' + id)
+        axios.get(Constant.BASE_URL + Constant.DELETE_MEMBER + this.props.data + '/' + id)
+            .then((res) => {
+                console.log(res)
+                if (res.data.returnObject) {
+                    Toast.show({
+                        text: 'Member deleted successfully',
+                        position: 'bottom',
+                        buttonText: 'Okay',
+                        type: "success",
+                        duration: 3000
+                    })
+                    this.getAllMemberList()
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+
+                Toast.show({
+                    text: 'Check your network',
+                    position: 'bottom',
+                    buttonText: 'Okay',
+                    type: "danger",
+                    duration: 3000
+                })
+            })
+    }
     getAllMemberList() {
+        console.log('call hoa')
         this.setState({ isLoading: true })
 
         console.log(this.props.data)
@@ -72,10 +124,11 @@ export default class ViewTeam extends Component {
                                     <Thumbnail source={{ uri: Constant.BASE_URL + Constant.IMAGE_URL_PATH + m.imageUrl }} />
                                     <Text style={{ color: 'black' }}>{m.employeeName}</Text>
                                 </Left>
-                                <Right />
+                                <Right>
+                                    <Icon name="trash" style={{ color: 'red', fontSize: 25, marginLeft: 15 }} onPress={this.deleteMember.bind(this, m.employeeId)} />
+                                </Right>
                             </CardItem>
                         </Card>
-
                     )
                 })}
             </View>
@@ -123,6 +176,7 @@ export default class ViewTeam extends Component {
 
                         {this.state.isData === true ? this.handleTeamName() : null}
                         {this.state.isData === true ? this.handleUserList() : null}
+                        {this.state.isLoading === true ? this.handleLoading() : null}
 
                     </Content>
 

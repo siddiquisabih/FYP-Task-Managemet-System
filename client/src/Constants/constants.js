@@ -6,9 +6,9 @@ class Constant {
 
 
 
-    // static BASE_URL = 'http://192.168.0.107:3050/' //laptop    
+    static BASE_URL = 'http://192.168.0.105:3050/' //laptop    
     // static BASE_URL = 'https://patient-server.herokuapp.com/' //live
-    static BASE_URL = 'http://10.30.1.115:3050/' // office
+    // static BASE_URL = 'http://10.30.1.115:3050/' // office
     // static BASE_URL = 'http://10.65.1.199:3050/' // university
 
     // static AUTH_LOCAL_KEY = 'auth'
@@ -59,6 +59,12 @@ class Constant {
     static CHANGE_PASSWORD = 'api/change/password/'
 
     static GET_MEMBER_LIST = 'api/team/getMemberList/'
+
+    static GET_ALL_EMPLOYEE_FOR_TEAM = 'api/team/getAllForTeam/'
+
+    static DELETE_MEMBER = 'api/team/deleteMember/'
+
+    static ADD_TEAM_MEMBER = 'api/team/addMember/'
 
 }
 

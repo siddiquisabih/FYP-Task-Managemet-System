@@ -121,6 +121,7 @@ module.exports = {
         })
     },
 
+
     addTeamMember: (req, res, next) => {
         var empId = req.params.employeeId
         var temMembersList = req.body.teamMembers
@@ -145,7 +146,17 @@ module.exports = {
                             return res.send({ success: false, message: err.message, returnObject: null })
                         }
                         if (doc) {
-                            return res.send({ success: true, message: 'Team Added', returnObject: doc })
+
+                            empModal.findOneAndUpdate({ employeeId: temMembersList[0].employeeId }, { $set: { isMember: true } })
+                                .then((respon) => {
+                                    return res.send({ success: true, message: 'Team Added', returnObject: doc })
+                                })
+                                .catch((errorr) => {
+                                    return res.send({ success: false, message: errorr.message, returnObject: null })
+                                })
+
+
+
                         }
                     })
                 }
@@ -185,12 +196,18 @@ module.exports = {
                     })
                 }
                 var isTeamOrNot = temp[0] !== undefined ? true : false
-                empModal.findByIdAndUpdate({ _id: found._id }, { $set: { teamMembers: temp, isTeam: isTeamOrNot } }, function (err, doc) {
+                empModal.findByIdAndUpdate({ _id: found._id }, { $set: { teamMembers: temp, isTeam: isTeamOrNot, isMember: false } }, function (err, doc) {
                     if (err) {
                         return res.send({ success: false, message: err.message, returnObject: null })
                     }
                     if (doc) {
-                        return res.send({ success: true, message: 'Member deleted successfully ', returnObject: doc })
+                        empModal.findOneAndUpdate({ employeeId: deltedMember }, { $set: { isMember: false } })
+                            .then((respon) => {
+                                return res.send({ success: true, message: 'Member deleted successfully ', returnObject: doc })
+                            })
+                            .catch((errorr) => {
+                                return res.send({ success: false, message: errorr.message, returnObject: null })
+                            })
                     }
                 })
             }
@@ -223,7 +240,27 @@ module.exports = {
             }
 
         })
-    }
+    },
+
+
+
+    getAllEmployeesForTeam: (req, res, next) => {
+
+        const emp = req.params.employeeId
+        var empAllArray = []
+        empModal.find({}).then(data => {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].employeeId != emp && data[i].isMember === false) {
+                    empAllArray.push(data[i])
+                }
+            }
+            res.send({ success: true, message: "All employees", returnObj: empAllArray })
+        }).catch(er => {
+            res.send({ success: false, message: "error", returnObj: er })
+        })
+    },
+
+
 }
 
 

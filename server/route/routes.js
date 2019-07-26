@@ -29,8 +29,9 @@ module.exports = (app) => {
     app.get('/api/employee/getAllEmployees/:employeeId', empControler.getAllEmployees)
     app.post('/api/change/password/:employeeId', empControler.changePassword)
     app.post('/api/team/addMember/:employeeId', empControler.addTeamMember)
-    app.delete('/api/team/deleteMember/:employeeId/:deleteEmpId', empControler.deleteMembers)
+    app.get('/api/team/deleteMember/:employeeId/:deleteEmpId', empControler.deleteMembers)
     app.get('/api/team/getMemberList/:employeeId', empControler.getUserTeamMembers)
+    app.get('/api/team/getAllForTeam/:employeeId', empControler.getAllEmployeesForTeam)
 
 
     // communication 

@@ -41,6 +41,8 @@ class RouteKey {
 
     static VIEW_TEAM = 'viewTeam'
 
+    static ADD_TEAM =  'addTeam'
+
 
 }
 

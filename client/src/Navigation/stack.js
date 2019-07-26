@@ -29,6 +29,7 @@ import AddEmployee from "../components/addEmployee/newEmployee"
 import ChangePass from "../components/profile/changePass"
 import ManageTeam from "../components/Team/manageTeam"
 import ViewTeam from "../components/Team/viewTeam";
+import AddTeam from "../components/Team/addTeam";
 
 
 
@@ -52,6 +53,7 @@ const RouteFlux = (props) => {
                 <Scene key={RouteKey.CHAT_ROOM} component={ChatRoom} hideNavBar />
                 <Scene key={RouteKey.CHANGE_PASS} component={ChangePass} hideNavBar />
                 <Scene key={RouteKey.VIEW_TEAM} component={ViewTeam} hideNavBar />
+                <Scene key={RouteKey.ADD_TEAM} component={AddTeam} hideNavBar />
 
                 <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
                     <Scene>

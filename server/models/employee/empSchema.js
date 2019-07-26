@@ -107,6 +107,11 @@ const empHead = new Schema({
         type: Boolean
     },
     teamMembers: [members],
+
+    isMember: {
+        type: Boolean
+    }
+
 })
 
 const employee = mongoose.model("employee", empHead)

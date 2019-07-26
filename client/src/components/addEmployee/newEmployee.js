@@ -201,6 +201,7 @@ class AddEmployee extends Component {
             password: '',
             isTeam: false,
             teamMembers: [],
+            isMember:false
         }
 
 

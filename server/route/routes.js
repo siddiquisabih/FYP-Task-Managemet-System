@@ -2,6 +2,7 @@ var authControler = require("../controler/authControler")
 var taskControler = require("../controler/taskControler")
 var empControler = require("../controler/empControler")
 var chatControler = require("../controler/chatController")
+var expControler = require("../controler/expControler")
 
 module.exports = (app) => {
 
@@ -19,6 +20,7 @@ module.exports = (app) => {
     app.post('/api/task/update', taskControler.updateTask)
     app.get('/api/task/getAllTaskByEmpID/:employeeId', taskControler.getAllTaskByEmpID)
     app.get('/api/task/getAllByYouTask/:employeeId', taskControler.getAllTaskByYou)
+    app.get('/api/task/filter/:employeeId/:filterOptions', taskControler.filterTask)
 
 
     // app.get('/api/task/getAll/',taskControler.getAllTask)
@@ -42,6 +44,16 @@ module.exports = (app) => {
 
     app.get('/api/chat/getChatByTranId/:tranId', chatControler.getChatByTranId)
     app.post('/api/chat/sendMessage/:tranId', chatControler.sendMessage)
+
+
+
+    // expense 
+
+    app.post('/api/expense/create', expControler.createExpense)
+    app.get('/api/expense/getAll', expControler.getAllExpense)
+    app.post('/api/expense/updateExpense' , expControler.updateExpense)
+    app.get('/api/expense/getByEmpId/:employeeId' , expControler.getExpenseByEmpId)
+
 
 
 

@@ -110,7 +110,39 @@ module.exports = {
 
     },
 
- 
+
+
+    filterTask: (req, res, next) => {
+
+        var employeeId = req.params.employeeId
+        var filter = req.params.filterOptions
+        var toYouTask = []
+        var ByYouTask = []
+        // return res.send({ success: true, message: "task filter", returnObj: employeeId + ' ' + filter })
+
+        // complete
+        if (filter == 1) {
+            task.find({ createdByID: employeeId }).then(data => {
+                ByYouTask = data
+                task.find({ employeeId: employeeId }).then(alldata => {
+                    toYouTask = alldata
+                    var obj = {
+                        toYou: toYouTask,
+                        byYou: ByYouTask
+                    }
+                    return res.send({ success: true, message: "task filter", returnObj: obj })
+                }).catch(er => {
+                    res.send({ success: false, message: "error", returnObj: er })
+                })
+            }).catch(er => {
+                res.send({ success: false, message: "error", returnObj: er })
+            })
+        }
+
+    }
+
+
+
 
 }
 

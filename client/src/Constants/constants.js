@@ -66,6 +66,14 @@ class Constant {
 
     static ADD_TEAM_MEMBER = 'api/team/addMember/'
 
+    static CREATE_EXPENSE = 'api/expense/create'
+
+    static GET_ALL_EXPENSE = 'api/expense/getAll'
+
+    static EXPENSE_APPROVAL = 'api/expense/updateExpense'
+
+    static GET_EXPENSE_BY_ID = 'api/expense/getByEmpId/'
+
 }
 
 export default Constant

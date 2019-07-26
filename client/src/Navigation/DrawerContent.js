@@ -54,6 +54,11 @@ export default class DrawerContent extends Component {
           <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.MANAGE_TEAM]()}>
             <Text uppercase={false} style={styles.buttonText}>  Manage Team</Text>
           </Button>
+
+          <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.EXPENSE_UPDATE]()}>
+            <Text uppercase={false} style={styles.buttonText}>Manage Expense</Text>
+          </Button>
+
         </View>
       )
     }
@@ -63,11 +68,21 @@ export default class DrawerContent extends Component {
     if (this.state.userDetail.isAdmin === false) {
       return (
 
-        <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.MY_TEAM]()}>
-          <Text uppercase={false} style={styles.buttonText}>Team Detail</Text>
-        </Button>
+        <View>
 
+          <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.MY_TEAM]()}>
+            <Text uppercase={false} style={styles.buttonText}>Team Detail</Text>
+          </Button>
 
+          <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.CREATE_EXPENSE]()}>
+            <Text uppercase={false} style={styles.buttonText}>Create Expense</Text>
+          </Button>
+
+          <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.EXPENSE_LIST]()}>
+            <Text uppercase={false} style={styles.buttonText}>Expense List</Text>
+          </Button>
+
+        </View>
 
       )
     }

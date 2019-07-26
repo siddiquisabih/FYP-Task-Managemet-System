@@ -46,7 +46,12 @@ class RouteKey {
     static MY_TEAM = 'MyTeam'
 
     static TEAM_TASK = 'teamTask'
-
+    
+    static EXPENSE_UPDATE = 'updateExpense'
+    
+    static CREATE_EXPENSE = 'createExpense'
+    
+    static EXPENSE_LIST = 'expenseList'
 
 
 }

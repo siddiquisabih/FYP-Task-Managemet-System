@@ -32,6 +32,9 @@ import ManageTeam from "../components/Team/manageTeam"
 import ViewTeam from "../components/Team/viewTeam";
 import AddTeam from "../components/Team/addTeam";
 import MyTeam from "../components/Team/myTeam";
+import UpdateExpense from "../components/expense/updateExpense";
+import CreateExpense from "../components/expense/createExpense";
+import ExpenseList from "../components/expense/expenseList";
 
 
 
@@ -60,7 +63,7 @@ const RouteFlux = (props) => {
 
                 <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
                     <Scene>
-                        <Scene key={RouteKey.OVERVIEW} component={Overview} hideNavBar initial />
+                        <Scene key={RouteKey.OVERVIEW} component={Overview} hideNavBar />
                         <Scene key={RouteKey.CREATE_TASK} component={CreateTask} hideNavBar />
                         <Scene key={RouteKey.TASK_LIST} component={TaskList} hideNavBar />
                         <Scene key={RouteKey.USER_PROFILE} component={UserProfile} hideNavBar />
@@ -69,7 +72,9 @@ const RouteFlux = (props) => {
                         <Scene key={RouteKey.ADD_EMPLOYEE} component={AddEmployee} hideNavBar />
                         <Scene key={RouteKey.MANAGE_TEAM} component={ManageTeam} hideNavBar />
                         <Scene key={RouteKey.MY_TEAM} component={MyTeam} hideNavBar />
-
+                        <Scene key={RouteKey.EXPENSE_UPDATE} component={UpdateExpense} hideNavBar />
+                        <Scene key={RouteKey.CREATE_EXPENSE} component={CreateExpense} hideNavBar />
+                        <Scene key={RouteKey.EXPENSE_LIST} component={ExpenseList} hideNavBar initial />
                         <Scene key={RouteKey.LOGOUT} component={Logout} hideNavBar />
                     </Scene>
 

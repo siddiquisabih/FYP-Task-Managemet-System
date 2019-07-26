@@ -65,6 +65,7 @@ module.exports = {
             if (data.length == 0) {
                 res.send({ success: true, message: "You have no expense", returnObj: null })
             } else {
+
                 res.send({ success: true, message: "Expense list", returnObj: data })
             }
         }).catch(er => {

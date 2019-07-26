@@ -27,7 +27,7 @@ module.exports = (app) => {
     app.post('/api/create/employee', empControler.createEmp)
     app.post('/api/update/employee', empControler.updateEmp)
     app.get('/api/employee/getAllEmployees/:employeeId', empControler.getAllEmployees)
-
+    app.post('/api/change/password/:employeeId', empControler.changePassword)
 
 
     // communication 

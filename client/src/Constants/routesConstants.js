@@ -34,7 +34,7 @@ class RouteKey {
     static TASK_DETAIL = 'taskDetail'
 
 
-
+    static ADD_EMPLOYEE = 'addEmployee'
 }
 
 export default RouteKey

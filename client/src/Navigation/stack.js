@@ -25,7 +25,7 @@ import CommList from '../components/communication/commList'
 import ChatRoom from '../components/communication/chatRoom'
 import TaskDetail from "../components/task/taskDetail";
 // import { Icon } from 'native-base';
-
+import AddEmployee from "../components/addEmployee/newEmployee"
 
 const RouteFlux = (props) => {
     // const MenuIcon = () => <Icon name="ios-cog" />
@@ -56,6 +56,7 @@ const RouteFlux = (props) => {
                         <Scene key={RouteKey.USER_PROFILE} component={UserProfile} hideNavBar initial />
                         <Scene key={RouteKey.CREATE_COMM} component={CreateComm} hideNavBar />
                         <Scene key={RouteKey.COMM_LIST} component={CommList} hideNavBar />
+                        <Scene key={RouteKey.ADD_EMPLOYEE} component={AddEmployee} hideNavBar  />
 
                         <Scene key={RouteKey.LOGOUT} component={Logout} hideNavBar />
                     </Scene>

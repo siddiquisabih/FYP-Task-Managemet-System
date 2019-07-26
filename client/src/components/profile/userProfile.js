@@ -16,7 +16,8 @@ class UserProfile extends Component {
     constructor() {
         super()
         this.state = {
-            userDetail: {}
+            userDetail: {},
+            salary: ''
         }
     }
 
@@ -38,9 +39,14 @@ class UserProfile extends Component {
                 if (res) {
                     var data = JSON.parse(res)
                     console.log(data)
-                    this.setState({ userDetail: data })
+                    var salary = this.numberWithCommas(data.salary)
+                    this.setState({ userDetail: data, salary: salary })
                 }
             })
+    }
+
+    numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     render() {
         return (
@@ -52,7 +58,11 @@ class UserProfile extends Component {
                     <Body>
                         <Title>Profile</Title>
                     </Body>
-                    <Right />
+                    <Right >
+
+                    <Icon name="eye" style={styles.iconColor} onPress={this.openDrawer.bind(this)} />
+
+                    </Right>
                 </Header>
 
                 <LinearGradient colors={['#b3e5fc', '#03a9f4', '#039be5']} style={{ flex: 1 }}>
@@ -79,7 +89,7 @@ class UserProfile extends Component {
                         </View>
 
 
-                        <View><Text style={styles.userName} >{this.state.userDetail.fullname}</Text></View>
+                        <View><Text style={styles.userName} >{this.state.userDetail.fullName}</Text></View>
                         <View><Text style={styles.userName} >{this.state.userDetail.designation}</Text></View>
 
 
@@ -99,17 +109,6 @@ class UserProfile extends Component {
 
                         </View>
 
-                        <View
-                            style={styles.gridCol}>
-                            <View style={styles.gridCell}>
-                                <Text style={styles.gridText} >Status</Text>
-                            </View>
-                            <View style={styles.gridCellValue}>
-                                <Text style={styles.gridTextvalue} >{this.state.userDetail.status}</Text>
-                            </View>
-
-
-                        </View>
 
                         <View
                             style={styles.gridCol}>
@@ -117,9 +116,22 @@ class UserProfile extends Component {
                                 <Text style={styles.gridText} >Joining</Text>
                             </View>
                             <View style={styles.gridCellValue}>
-                                <Text style={styles.gridTextvalue} >24-May-2018</Text>
+                                <Text style={styles.gridTextvalue} >{this.state.userDetail.joinedDate}</Text>
                             </View>
                         </View>
+
+                        <View
+                            style={styles.gridCol}>
+                            <View style={styles.gridCell}>
+                                <Text style={styles.gridText} >DOB</Text>
+                            </View>
+                            <View style={styles.gridCellValue}>
+                                <Text style={styles.gridTextvalue} >{this.state.userDetail.dateOfBirth}</Text>
+                            </View>
+                        </View>
+
+
+
 
                         <View
                             style={styles.gridCol}>
@@ -127,7 +139,7 @@ class UserProfile extends Component {
                                 <Text style={styles.gridText} >Salary</Text>
                             </View>
                             <View style={styles.gridCellValue}>
-                                <Text style={styles.gridTextvalue} >{this.state.userDetail.salary}</Text>
+                                <Text style={styles.gridTextvalue} >{this.state.salary}</Text>
                             </View>
 
 

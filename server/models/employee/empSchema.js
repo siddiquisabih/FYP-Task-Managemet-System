@@ -51,10 +51,10 @@ const empHead = new Schema({
         type: String
     },
     dateOfBirth: {
-        type: Date,
+        type: String,
     },
     joinedDate: {
-        type: Date,
+        type: String,
     },
     nationality: {
         type: String,
@@ -86,6 +86,9 @@ const empHead = new Schema({
     },
     isAdmin: {
         type: Boolean
+    },
+    lastName: {
+        type: String
     }
 })
 
@@ -125,4 +128,20 @@ module.exports = employee
 // }
 
 
+// var asd = {
 
+//     createdByID: "",
+//     createdBy: "",
+//     imageUrl: "",
+//     email: "",
+//     salary: "",
+//     dateOfBirth: "",
+//     joinedDate: "",
+//     name: "",
+//     password: "",
+//     fullName: "",
+//     designation: "",
+//     isAdmin: "",
+//     mobileNo: "",
+//     address: "",
+// }

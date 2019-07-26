@@ -7,20 +7,17 @@ module.exports = {
         const email = req.body.email
         // const password = req.body.password
         const name = req.body.name
-
         if (!email || !name) {
-            res.send("you must provide email and name ")
+            res.send({ success: false, message: 'you must provide email and name', returnObject: null })
         }
         empModal.findOne({
             email: email
         }, (err, found) => {
             if (err) {
-                return next(err)
+                return res.send({ success: false, message: err.message, returnObject: null })
             }
             if (found) {
-                return res.send({
-                    error: "Email Is In Use Or employee already exist"
-                })
+                return res.send({ success: false, message: 'Email Is In Use Or employee already exist', returnObject: null })
             }
             if (!found) {
                 empModal.create(req.body)
@@ -28,17 +25,19 @@ module.exports = {
                         if (data) {
                             var objId = data._id.toString()
                             var customerid = objId.slice(objId.length - 5)
-                            empModal.findByIdAndUpdate({ _id: data._id }, { $set: { employeeId: customerid } }, function (err, doc) {
+                            empModal.findByIdAndUpdate({ _id: data._id }, { $set: { employeeId: customerid, password: '123456' } }, function (err, doc) {
                                 if (err) {
-                                    res.send({ returnId: -1, message: err, returnObject: {} })
+                                    return res.send({ success: false, message: "Can't Create Employee", returnObject: null })
                                 }
                                 else {
                                     var sendObj = data
-                                    // delete sendObj.password
-                                    res.send({ returnId: 1, message: 'successfully created', returnObject: sendObj })
+                                    return res.send({ success: true, message: "successfully created", returnObject: sendObj })
                                 }
                             })
                         }
+                    })
+                    .catch((error) => {
+                        return res.send({ success: false, message: error.message, returnObject: null })
                     })
             }
         })
@@ -84,12 +83,50 @@ module.exports = {
         }).catch(er => {
             res.send({ success: false, message: "error", returnObj: er })
         })
+    },
+
+
+    changePassword: (req, res, next) => {
+        const employeeId = req.params.employeeId
+
+        if (!employeeId) {
+            res.send("you must provide employee id")
+        }
+        empModal.findOne({
+            employeeId: employeeId
+        }, (err, found) => {
+            if (err) {
+                return res.send({ success: false, message: err.message, returnObject: null })
+            }
+            if (found) {
+
+                if (found.password !== req.body.oldPass) {
+                    return res.send({ success: false, message: "Password dose not match", returnObject: null })
+                }
+                else {
+                    empModal.findByIdAndUpdate({ _id: found._id }, {
+                        password: req.body.newPass
+                    }, function (err, doc) {
+                        if (err) {
+                            return res.send({ success: false, message: err.message, returnObject: null })
+                        }
+                        if (doc) {
+                            return res.send({ success: true, message: 'Password Changed', returnObject: doc })
+                        }
+                    })
+                }
+            }
+        })
     }
+
+
+
 }
 
 
 
-
+// oldPass
+// newPass
 // error
 // return res.status(400).send({success: false, msg: err});
 

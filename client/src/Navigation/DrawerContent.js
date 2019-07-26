@@ -63,7 +63,7 @@ export default class DrawerContent extends Component {
                 </View>
               </Card>
             </View>
-            <View><Text style={styles.userName} > Hi ! {this.state.userDetail.fullname}</Text></View>
+            <View><Text style={styles.userName} > Hi ! {this.state.userDetail.fullName}</Text></View>
 
 
 
@@ -96,6 +96,10 @@ export default class DrawerContent extends Component {
 
             <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.LOGOUT]()}>
               <Text uppercase={false} style={styles.buttonText}>  Logout</Text>
+            </Button>
+
+            <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.ADD_EMPLOYEE]()}>
+              <Text uppercase={false} style={styles.buttonText}>  Add Employee</Text>
             </Button>
 
           </Content>

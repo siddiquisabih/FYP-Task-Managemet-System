@@ -144,7 +144,7 @@ class TaskDetail extends Component {
                         <Text style={styles.headingDetail}>Attachments :</Text>
 
 
-                        {this.state.isAttachment === true ? this.showAttachments() : 'No attachment available '}
+                        {this.state.isAttachment === true ? this.showAttachments() : <Text style={styles.detailAns}>No attachment available</Text>}
 
 
 

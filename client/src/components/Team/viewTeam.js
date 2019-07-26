@@ -83,6 +83,12 @@ export default class ViewTeam extends Component {
                 })
             })
     }
+
+    viewTasks(id, name) {
+
+        Actions[RouteKey.TEAM_TASK]({ empId: id, EmpName: name })
+
+    }
     getAllMemberList() {
         console.log('call hoa')
         this.setState({ isLoading: true })
@@ -125,8 +131,12 @@ export default class ViewTeam extends Component {
                                     <Text style={{ color: 'black' }}>{m.employeeName}</Text>
                                 </Left>
                                 <Right>
-                                    <Icon name="trash" style={{ color: 'red', fontSize: 25, marginLeft: 15 }} onPress={this.deleteMember.bind(this, m.employeeId)} />
+                                    <View style={{ flexDirection: 'row', alignSelf: 'center', justifyContent: 'flex-end', width: '100%' }}>
+                                        <Icon name="trash" style={{ color: 'red', fontSize: 25, marginLeft: 15 }} onPress={this.deleteMember.bind(this, m.employeeId)} />
+                                        <Icon name="eye" style={{ color: 'gray', fontSize: 25, marginLeft: 15 }} onPress={this.viewTasks.bind(this, m.employeeId, m.employeeName)} />
+                                    </View>
                                 </Right>
+
                             </CardItem>
                         </Card>
                     )

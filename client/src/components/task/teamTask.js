@@ -91,6 +91,11 @@ export default class TeamTask extends Component {
 
 
 
+    taskDetail(data) {
+        console.log(data)
+        Actions[RouteKey.TASK_DETAIL]({ data: data })
+    }
+
     handleData() {
 
         return (
@@ -101,13 +106,13 @@ export default class TeamTask extends Component {
 
 
                             <Card style={styles.mainCard} key={v}>
-                                <Text style={styles.message}>Alert! you have a pending task</Text>
+                                {/* <Text style={styles.message}>Alert! you have a pending task</Text> */}
                                 <Text note style={styles.date}>Assign by {m.createdBy} on {m.createdDateCustom}</Text>
                                 <Text style={styles.description}>
                                     {m.taskTitle}
                                 </Text>
 
-                                <View style={{ marginLeft: 10, flexDirection: 'row' }}>
+                                <View style={{ marginLeft: 10, flexDirection: 'row', paddingBottom: 10 }}>
 
 
                                     <ProgressCircle
@@ -130,6 +135,12 @@ export default class TeamTask extends Component {
 
                                 </View>
 
+
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    <Button rounded light small style={{ alignSelf: 'center', marginBottom: 15, marginTop: 15, }} onPress={this.taskDetail.bind(this, m)}>
+                                        <Text uppercase={false}>Detail</Text>
+                                    </Button>
+                                </View>
 
 
 
@@ -172,7 +183,7 @@ export default class TeamTask extends Component {
             <Container>
                 <Header style={styles.header} hasTabs>
                     <Left >
-                        <Icon name="menu" style={styles.iconColor} onPress={() => { Actions.pop() })} />
+                        <Icon name="arrow-round-back" style={styles.iconColor} onPress={() => { Actions.pop() }} />
                     </Left>
                     <Body>
                         <Title> {this.props.EmpName} 's Task</Title>

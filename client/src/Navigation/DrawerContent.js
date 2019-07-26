@@ -42,6 +42,18 @@ export default class DrawerContent extends Component {
   }
 
 
+  renderForAdmin() {
+    if (this.state.userDetail.isAdmin === true) {
+      return (
+        <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.ADD_EMPLOYEE]()}>
+          <Text uppercase={false} style={styles.buttonText}>  Add Employee</Text>
+        </Button>
+      )
+    }
+  }
+
+
+
   render() {
     return (
       <Container>
@@ -64,7 +76,6 @@ export default class DrawerContent extends Component {
               </Card>
             </View>
             <View><Text style={styles.userName} > Hi ! {this.state.userDetail.fullName}</Text></View>
-
 
 
 
@@ -94,13 +105,17 @@ export default class DrawerContent extends Component {
               <Text uppercase={false} style={styles.buttonText}>  Profile</Text>
             </Button>
 
+
+            {this.renderForAdmin()}
+
+
+
+
             <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.LOGOUT]()}>
               <Text uppercase={false} style={styles.buttonText}>  Logout</Text>
             </Button>
 
-            <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.ADD_EMPLOYEE]()}>
-              <Text uppercase={false} style={styles.buttonText}>  Add Employee</Text>
-            </Button>
+
 
           </Content>
         </LinearGradient>

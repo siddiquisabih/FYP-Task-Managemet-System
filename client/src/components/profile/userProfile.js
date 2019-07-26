@@ -5,6 +5,7 @@ import styles from './profileStyles'
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import Constant from '../../Constants/constants';
+import RouteKey from '../../Constants/routesConstants';
 
 
 
@@ -48,6 +49,10 @@ class UserProfile extends Component {
     numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
+    goToChangePass() {
+        Actions[RouteKey.CHANGE_PASS]()
+    }
     render() {
         return (
             <Container>
@@ -60,7 +65,7 @@ class UserProfile extends Component {
                     </Body>
                     <Right >
 
-                    <Icon name="eye" style={styles.iconColor} onPress={this.openDrawer.bind(this)} />
+                        <Icon name="create" style={styles.iconColor} onPress={this.goToChangePass.bind(this)} />
 
                     </Right>
                 </Header>

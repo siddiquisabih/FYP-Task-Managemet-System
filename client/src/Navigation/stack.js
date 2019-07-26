@@ -26,6 +26,7 @@ import ChatRoom from '../components/communication/chatRoom'
 import TaskDetail from "../components/task/taskDetail";
 // import { Icon } from 'native-base';
 import AddEmployee from "../components/addEmployee/newEmployee"
+import ChangePass from "../components/profile/changePass"
 
 const RouteFlux = (props) => {
     // const MenuIcon = () => <Icon name="ios-cog" />
@@ -45,6 +46,7 @@ const RouteFlux = (props) => {
                 <Scene key={RouteKey.EDIT_TASK} component={EditTask} hideNavBar />
                 <Scene key={RouteKey.TASK_DETAIL} component={TaskDetail} hideNavBar />
                 <Scene key={RouteKey.CHAT_ROOM} component={ChatRoom} hideNavBar />
+                <Scene key={RouteKey.CHANGE_PASS} component={ChangePass} hideNavBar />
 
                 <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
                     {/* <Scene key={RouteKey.OVERVIEW} component={Overview} initial hideNavBar /> */}

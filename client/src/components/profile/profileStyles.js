@@ -48,22 +48,43 @@ export default StyleSheet.create({
     gridCell: {
         flex: 0.3,
         justifyContent: 'center',
-         borderRightWidth: 0.5,
-         borderColor: 'white',
+        borderRightWidth: 0.5,
+        borderColor: 'white',
     },
     gridCellValue: {
         flex: 1,
         justifyContent: 'center',
     },
     gridText: {
-        color:'white',
+        color: 'white',
     },
     gridTextvalue: {
         textAlign: 'right',
-        color:'white'
+        color: 'white'
+    },
+    textbox: {
+        width: '90%',
+        marginLeft: "5%",
+        color: 'white'
+
+    },
+    inputText: {
+        color: 'white'
     },
 
 
+    label: {
+        fontFamily: 'Cochin',
+        fontWeight: 'bold',
+        color: 'white',
+        padding: 10,
+        // textAlign: 'center'
 
-
+    },
+    buttonStyle: {
+        justifyContent: 'center',
+        borderBottomWidth: 0,
+        marginBottom: 10,
+        marginTop: 10,
+    },
 })

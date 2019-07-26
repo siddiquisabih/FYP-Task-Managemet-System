@@ -32,9 +32,10 @@ class RouteKey {
     static CREATE_TASK = 'createTask'
 
     static TASK_DETAIL = 'taskDetail'
-
-
+    
     static ADD_EMPLOYEE = 'addEmployee'
+    
+    static CHANGE_PASS = 'changePass'
 }
 
 export default RouteKey

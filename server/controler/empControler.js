@@ -20,7 +20,10 @@ module.exports = {
                 return res.send({ success: false, message: 'Email Is In Use Or employee already exist', returnObject: null })
             }
             if (!found) {
-                empModal.create(req.body)
+                var body = req.body
+                body.email = body.email.toLowerCase()
+                console.log(body)
+                empModal.create(body)
                     .then((data) => {
                         if (data) {
                             var objId = data._id.toString()
@@ -101,7 +104,7 @@ module.exports = {
             if (found) {
 
                 if (found.password !== req.body.oldPass) {
-                    return res.send({ success: false, message: "Password dose not match", returnObject: null })
+                    return res.send({ success: false, message: "Incorrect old password", returnObject: null })
                 }
                 else {
                     empModal.findByIdAndUpdate({ _id: found._id }, {

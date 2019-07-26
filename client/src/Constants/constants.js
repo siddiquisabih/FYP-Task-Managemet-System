@@ -56,6 +56,8 @@ class Constant {
 
     static CREATE_EMPLOYEE = 'api/create/employee'
 
+    static CHANGE_PASSWORD = 'api/change/password/'
+
 }
 
 export default Constant

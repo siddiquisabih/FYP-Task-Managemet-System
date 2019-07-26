@@ -32,7 +32,7 @@ module.exports = {
 
     login: (req, res, next) => {
 
-        const email = req.body.email
+        const email = req.body.email.toLowerCase()
         const password = req.body.password
 
         if (email && password) {

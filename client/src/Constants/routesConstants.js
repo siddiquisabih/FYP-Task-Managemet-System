@@ -36,6 +36,12 @@ class RouteKey {
     static ADD_EMPLOYEE = 'addEmployee'
     
     static CHANGE_PASS = 'changePass'
+
+    static MANAGE_TEAM = 'manageTeam'
+
+    static VIEW_TEAM = 'viewTeam'
+
+
 }
 
 export default RouteKey

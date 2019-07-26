@@ -45,9 +45,16 @@ export default class DrawerContent extends Component {
   renderForAdmin() {
     if (this.state.userDetail.isAdmin === true) {
       return (
-        <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.ADD_EMPLOYEE]()}>
-          <Text uppercase={false} style={styles.buttonText}>  Add Employee</Text>
-        </Button>
+        <View>
+
+          <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.ADD_EMPLOYEE]()}>
+            <Text uppercase={false} style={styles.buttonText}>  Add Employee</Text>
+          </Button>
+
+          <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.MANAGE_TEAM]()}>
+            <Text uppercase={false} style={styles.buttonText}>  Manage Team</Text>
+          </Button>
+        </View>
       )
     }
   }
@@ -104,6 +111,7 @@ export default class DrawerContent extends Component {
             <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.USER_PROFILE]()}>
               <Text uppercase={false} style={styles.buttonText}>  Profile</Text>
             </Button>
+
 
 
             {this.renderForAdmin()}

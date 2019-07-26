@@ -3,7 +3,20 @@ const Schema = mongoose.Schema
 
 
 
+const members = new Schema({
 
+    employeeId: {
+        type: String
+    },
+    employeeName: {
+        type: String
+    },
+    imageUrl: {
+        type: String
+    }
+
+
+})
 
 const empHead = new Schema({
 
@@ -89,7 +102,11 @@ const empHead = new Schema({
     },
     lastName: {
         type: String
-    }
+    },
+    isTeam: {
+        type: Boolean
+    },
+    teamMembers: [members],
 })
 
 const employee = mongoose.model("employee", empHead)
@@ -144,4 +161,9 @@ module.exports = employee
 //     isAdmin: "",
 //     mobileNo: "",
 //     address: "",
+//     lastName :"",
 // }
+
+// employeeId: :"",
+// employeeName: :"",
+// imageUrl: :"" 

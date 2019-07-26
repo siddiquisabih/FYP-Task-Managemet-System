@@ -27,6 +27,10 @@ import TaskDetail from "../components/task/taskDetail";
 // import { Icon } from 'native-base';
 import AddEmployee from "../components/addEmployee/newEmployee"
 import ChangePass from "../components/profile/changePass"
+import ManageTeam from "../components/Team/manageTeam"
+import ViewTeam from "../components/Team/viewTeam";
+
+
 
 const RouteFlux = (props) => {
     // const MenuIcon = () => <Icon name="ios-cog" />
@@ -47,18 +51,18 @@ const RouteFlux = (props) => {
                 <Scene key={RouteKey.TASK_DETAIL} component={TaskDetail} hideNavBar />
                 <Scene key={RouteKey.CHAT_ROOM} component={ChatRoom} hideNavBar />
                 <Scene key={RouteKey.CHANGE_PASS} component={ChangePass} hideNavBar />
+                <Scene key={RouteKey.VIEW_TEAM} component={ViewTeam} hideNavBar />
 
                 <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
-                    {/* <Scene key={RouteKey.OVERVIEW} component={Overview} initial hideNavBar /> */}
                     <Scene>
-
                         <Scene key={RouteKey.OVERVIEW} component={Overview} hideNavBar />
                         <Scene key={RouteKey.CREATE_TASK} component={CreateTask} hideNavBar />
                         <Scene key={RouteKey.TASK_LIST} component={TaskList} hideNavBar />
-                        <Scene key={RouteKey.USER_PROFILE} component={UserProfile} hideNavBar initial />
+                        <Scene key={RouteKey.USER_PROFILE} component={UserProfile} hideNavBar />
                         <Scene key={RouteKey.CREATE_COMM} component={CreateComm} hideNavBar />
                         <Scene key={RouteKey.COMM_LIST} component={CommList} hideNavBar />
-                        <Scene key={RouteKey.ADD_EMPLOYEE} component={AddEmployee} hideNavBar  />
+                        <Scene key={RouteKey.ADD_EMPLOYEE} component={AddEmployee} hideNavBar />
+                        <Scene key={RouteKey.MANAGE_TEAM} component={ManageTeam} hideNavBar initial />
 
                         <Scene key={RouteKey.LOGOUT} component={Logout} hideNavBar />
                     </Scene>

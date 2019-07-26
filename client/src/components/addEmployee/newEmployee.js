@@ -96,7 +96,7 @@ class AddEmployee extends Component {
 
 
 
-     
+
 
     createEmployee() {
         console.log(this.state.fileAttachment[0].filename)
@@ -198,7 +198,9 @@ class AddEmployee extends Component {
             lastName: this.state.lastName,
             designation: this.state.designation,
             isAdmin: false,
-            password: ''
+            password: '',
+            isTeam: false,
+            teamMembers: [],
         }
 
 

@@ -58,6 +58,8 @@ class Constant {
 
     static CHANGE_PASSWORD = 'api/change/password/'
 
+    static GET_MEMBER_LIST = 'api/team/getMemberList/'
+
 }
 
 export default Constant

@@ -16,6 +16,7 @@ import RouteKey from "../Constants/routesConstants";
 
 
 import CreateTask from "../components/task/createTask";
+import TeamTask from "../components/task/teamTask";
 import Logout from "../components/Auth/logout"
 import Overview from "../components/overview";
 import TaskList from "../components/task/taskList";
@@ -30,6 +31,7 @@ import ChangePass from "../components/profile/changePass"
 import ManageTeam from "../components/Team/manageTeam"
 import ViewTeam from "../components/Team/viewTeam";
 import AddTeam from "../components/Team/addTeam";
+import MyTeam from "../components/Team/myTeam";
 
 
 
@@ -54,17 +56,19 @@ const RouteFlux = (props) => {
                 <Scene key={RouteKey.CHANGE_PASS} component={ChangePass} hideNavBar />
                 <Scene key={RouteKey.VIEW_TEAM} component={ViewTeam} hideNavBar />
                 <Scene key={RouteKey.ADD_TEAM} component={AddTeam} hideNavBar />
+                <Scene key={RouteKey.TEAM_TASK} component={TeamTask} hideNavBar />
 
                 <Drawer key={RouteKey.DRAWER} type="reset" contentComponent={DrawerContent} hideNavBar drawer>
                     <Scene>
-                        <Scene key={RouteKey.OVERVIEW} component={Overview} hideNavBar />
+                        <Scene key={RouteKey.OVERVIEW} component={Overview} hideNavBar initial />
                         <Scene key={RouteKey.CREATE_TASK} component={CreateTask} hideNavBar />
                         <Scene key={RouteKey.TASK_LIST} component={TaskList} hideNavBar />
                         <Scene key={RouteKey.USER_PROFILE} component={UserProfile} hideNavBar />
                         <Scene key={RouteKey.CREATE_COMM} component={CreateComm} hideNavBar />
                         <Scene key={RouteKey.COMM_LIST} component={CommList} hideNavBar />
                         <Scene key={RouteKey.ADD_EMPLOYEE} component={AddEmployee} hideNavBar />
-                        <Scene key={RouteKey.MANAGE_TEAM} component={ManageTeam} hideNavBar initial />
+                        <Scene key={RouteKey.MANAGE_TEAM} component={ManageTeam} hideNavBar />
+                        <Scene key={RouteKey.MY_TEAM} component={MyTeam} hideNavBar />
 
                         <Scene key={RouteKey.LOGOUT} component={Logout} hideNavBar />
                     </Scene>

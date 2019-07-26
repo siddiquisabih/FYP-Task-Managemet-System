@@ -32,16 +32,21 @@ class RouteKey {
     static CREATE_TASK = 'createTask'
 
     static TASK_DETAIL = 'taskDetail'
-    
+
     static ADD_EMPLOYEE = 'addEmployee'
-    
+
     static CHANGE_PASS = 'changePass'
 
     static MANAGE_TEAM = 'manageTeam'
 
     static VIEW_TEAM = 'viewTeam'
 
-    static ADD_TEAM =  'addTeam'
+    static ADD_TEAM = 'addTeam'
+
+    static MY_TEAM = 'MyTeam'
+
+    static TEAM_TASK = 'teamTask'
+
 
 
 }

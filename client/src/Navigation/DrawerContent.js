@@ -59,6 +59,19 @@ export default class DrawerContent extends Component {
     }
   }
 
+  notForAdmin() {
+    if (this.state.userDetail.isAdmin === false) {
+      return (
+
+        <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.MY_TEAM]()}>
+          <Text uppercase={false} style={styles.buttonText}>Team Detail</Text>
+        </Button>
+
+
+
+      )
+    }
+  }
 
 
   render() {
@@ -108,9 +121,12 @@ export default class DrawerContent extends Component {
               <Text uppercase={false} style={styles.buttonText}>  Chat List</Text>
             </Button>
 
+            {this.notForAdmin()}
+
             <Button rounded style={styles.buttonStyle} onPress={() => Actions[RouteKey.USER_PROFILE]()}>
               <Text uppercase={false} style={styles.buttonText}>  Profile</Text>
             </Button>
+
 
 
 
